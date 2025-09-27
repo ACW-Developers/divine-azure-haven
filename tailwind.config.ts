@@ -123,6 +123,46 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        "gradient-morph": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        "pulse-glow": {
+          "0%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.4)" },
+          "100%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--secondary) / 0.3)" },
+        },
+        "bounce-in": {
+          "0%": { transform: "scale(0.3)", opacity: "0" },
+          "50%": { transform: "scale(1.05)", opacity: "0.8" },
+          "70%": { transform: "scale(0.9)", opacity: "0.9" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(50px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "zoom-in": {
+          "0%": { transform: "scale(0.8)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "rotate-in": {
+          "0%": { transform: "rotate(-10deg) scale(0.8)", opacity: "0" },
+          "100%": { transform: "rotate(0deg) scale(1)", opacity: "1" },
+        },
+        "elastic-entrance": {
+          "0%": { transform: "scale(0, 1)", opacity: "0" },
+          "50%": { transform: "scale(1.2, 1)", opacity: "0.8" },
+          "100%": { transform: "scale(1, 1)", opacity: "1" },
+        },
+        "typewriter": {
+          "0%": { width: "0ch" },
+          "100%": { width: "20ch" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -134,6 +174,15 @@ export default {
         "slide-in-left": "slide-in-left 0.6s ease-out",
         "float": "float 3s ease-in-out infinite",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+        "gradient-morph": "gradient-morph 15s ease infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite alternate",
+        "bounce-in": "bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "slide-up": "slide-up 0.6s ease-out",
+        "zoom-in": "zoom-in 0.5s ease-out",
+        "rotate-in": "rotate-in 0.7s ease-out",
+        "elastic-entrance": "elastic-entrance 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "typewriter": "typewriter 4s steps(20) infinite alternate",
+        "shimmer": "shimmer 3s linear infinite",
       },
     },
   },

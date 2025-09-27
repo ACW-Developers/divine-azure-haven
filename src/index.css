@@ -65,25 +65,11 @@
     --shadow-hero: 0 10px 40px -10px hsl(215 85% 25% / 0.2);
     --shadow-elegant: 0 20px 60px -20px hsl(215 85% 25% / 0.25);
 
-    /* Smooth Transitions */
+    /* Advanced Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .dark {
@@ -131,6 +117,84 @@
   }
 }
 
+/* Custom Animation Utilities */
+@layer utilities {
+  /* Scroll Animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: var(--transition-smooth);
+  }
+  
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Parallax Effects */
+  .parallax-bg {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Glow Effects */
+  .glow-effect {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    transition: var(--transition-smooth);
+  }
+  
+  .glow-effect:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.5);
+  }
+  
+  /* Magnetic Hover */
+  .magnetic-hover {
+    transition: var(--transition-bounce);
+  }
+  
+  .magnetic-hover:hover {
+    transform: scale(1.05) translateY(-5px);
+  }
+  
+  /* Floating Elements */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Morphing Background */
+  .morphing-bg {
+    background: linear-gradient(-45deg, 
+      hsl(var(--primary)), 
+      hsl(var(--secondary)), 
+      hsl(var(--accent)), 
+      hsl(var(--primary-hover)));
+    background-size: 400% 400%;
+    animation: gradient-morph 15s ease infinite;
+  }
+  
+  /* Stagger Animations */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite alternate;
+  }
+  
+  /* Rotate Hover */
+  .rotate-hover {
+    transition: var(--transition-elastic);
+  }
+  
+  .rotate-hover:hover {
+    transform: rotate(10deg) scale(1.1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -138,5 +202,11 @@
 
   body {
     @apply bg-background text-foreground;
+    scroll-behavior: smooth;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
 }

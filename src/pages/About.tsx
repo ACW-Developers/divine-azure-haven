@@ -1,7 +1,9 @@
 import React from 'react';
 import Layout from '@/components/Layout';
+import AnimatedBackground from '@/components/AnimatedBackground';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useScrollAnimation, useParallax } from '@/hooks/useScrollAnimation';
 import { 
   Heart, 
   Shield, 
@@ -11,12 +13,18 @@ import {
   CheckCircle,
   Target,
   Eye,
-  Handshake
+  Handshake,
+  Sparkles
 } from 'lucide-react';
 import teamImage from '@/assets/team-image.jpg';
 import homeInterior from '@/assets/home-interior.jpg';
 
 const About = () => {
+  const parallaxOffset = useParallax();
+  const heroAnimation = useScrollAnimation(0.1);
+  const storyAnimation = useScrollAnimation(0.2);
+  const valuesAnimation = useScrollAnimation(0.2);
+  const teamAnimation = useScrollAnimation(0.2);
   const values = [
     {
       icon: Heart,
@@ -71,8 +79,13 @@ const About = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-hero text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <section className="relative py-20 morphing-bg text-primary-foreground overflow-hidden">
+        <AnimatedBackground />
+        
+        <div 
+          className="absolute inset-0 opacity-20 parallax-bg"
+          style={{ transform: `translateY(${parallaxOffset * 0.3}px)` }}
+        >
           <img
             src={homeInterior}
             alt="Comfortable home environment"
@@ -81,11 +94,19 @@ const About = () => {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in-up">
+          <div 
+            ref={heroAnimation.elementRef}
+            className={`transition-all duration-1000 ${
+              heroAnimation.isVisible ? 'animate-elastic-entrance' : 'opacity-0 transform scale-75'
+            }`}
+          >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              About <span className="text-accent">DivineAngel Care</span>
+              About <span className="text-accent relative animate-pulse-glow">
+                DivineAngel Care
+                <Sparkles className="absolute -top-2 -right-2 h-8 w-8 animate-bounce" />
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
               Founded on the belief that everyone deserves compassionate care in the comfort of their own home.
             </p>
           </div>
@@ -181,11 +202,24 @@ const About = () => {
       </section>
 
       {/* Our Values */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+      <section className="py-20 bg-background relative overflow-hidden">
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="h-full w-full bg-[linear-gradient(to_right,hsl(var(--primary))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary))_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse-slow" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div 
+            ref={valuesAnimation.elementRef}
+            className={`text-center mb-16 transition-all duration-800 ${
+              valuesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            }`}
+          >
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Our Core <span className="text-primary">Values</span>
+              Our Core <span className="text-primary relative">
+                Values
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-primary rounded-full animate-shimmer" />
+              </span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               These guiding principles shape everything we do and every interaction we have.
@@ -196,15 +230,27 @@ const About = () => {
             {values.map((value, index) => (
               <Card 
                 key={value.title} 
-                className="group text-center bg-gradient-card border-card-border shadow-card hover:shadow-card-hover transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`group text-center bg-gradient-card border-card-border shadow-card hover:shadow-card-hover transition-all duration-700 magnetic-hover glow-effect ${
+                  valuesAnimation.isVisible ? 'animate-rotate-in' : 'opacity-0 transform rotate-12 scale-75'
+                }`}
+                style={{ 
+                  animationDelay: valuesAnimation.isVisible ? `${index * 0.15}s` : '0s'
+                }}
               >
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
-                    <value.icon className="h-8 w-8 text-primary-foreground" />
+                <CardContent className="p-8 relative overflow-hidden">
+                  {/* Background Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+                  
+                  <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-all duration-500 pulse-glow relative z-10">
+                    <value.icon className="h-8 w-8 text-primary-foreground group-hover:animate-bounce" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300 relative z-10">{value.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors duration-300 relative z-10">{value.description}</p>
+                  
+                  {/* Sparkle Effect */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Sparkles className="h-4 w-4 text-accent animate-pulse-glow" />
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -284,18 +330,25 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Experience the DivineAngel Difference
-            </h2>
-            <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+      <section className="py-20 morphing-bg text-primary-foreground relative overflow-hidden">
+        {/* Floating Elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-float blur-2xl" />
+        <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/5 rounded-full animate-pulse-slow blur-xl" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="animate-elastic-entrance">
+            <div className="relative inline-block">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 animate-typewriter">
+                Experience the DivineAngel Difference
+              </h2>
+              <Sparkles className="absolute -top-4 -right-4 h-8 w-8 text-accent animate-bounce" />
+            </div>
+            <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto animate-fade-in-up stagger-2">
               Join hundreds of families who trust us with their most precious loved ones.
             </p>
             <Button 
               size="lg" 
-              className="bg-accent hover:bg-accent-hover text-accent-foreground text-lg px-8 py-4 shadow-hero"
+              className="bg-accent hover:bg-accent-hover text-accent-foreground text-lg px-8 py-4 shadow-hero magnetic-hover pulse-glow animate-zoom-in stagger-3"
             >
               Contact Us Today
             </Button>
