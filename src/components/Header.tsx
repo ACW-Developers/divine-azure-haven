@@ -67,7 +67,7 @@ const Header = () => {
   return (
     <>
       {/* Top Section - Social & Contact Info */}
-      <div className={`fixed top-0 left-0 right-0 z-60 bg-slate-800 text-white transition-all duration-500 ${
+      <div className={`fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-primary via-primary-dark to-secondary text-white transition-all duration-500 ${
         isTopSectionVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,18 +75,22 @@ const Header = () => {
             {/* Contact Info */}
             <div className="flex flex-wrap items-center justify-center sm:justify-start space-x-6 text-sm">
               <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-amber-400" />
-                <span className="text-slate-200">New York, NY</span>
+                <MapPin className="h-4 w-4 text-accent animate-pulse" />
+                <span className="text-white/90">Arizona, USA</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-amber-400" />
-                <span className="text-slate-200">(123) 456-7890</span>
+                <Phone className="h-4 w-4 text-accent animate-pulse" />
+                <span className="text-white/90">(123) 456-7890</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="h-4 w-4 text-accent animate-pulse" />
+                <span className="text-white/90">24/7 Available</span>
               </div>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-slate-300 font-medium">Follow Us:</span>
+              <span className="text-sm text-white/80 font-medium">Follow Us:</span>
               <div className="flex items-center space-x-3">
                 {socialLinks.map((social) => {
                   const IconComponent = social.icon;
@@ -94,7 +98,7 @@ const Header = () => {
                     <a
                       key={social.name}
                       href={social.href}
-                      className={`text-slate-400 transition-all duration-300 transform hover:scale-110 ${social.color}`}
+                      className="text-white/70 hover:text-accent transition-all duration-300 transform hover:scale-110 hover:rotate-6"
                       aria-label={social.name}
                     >
                       <IconComponent className="h-4 w-4" />
@@ -110,8 +114,8 @@ const Header = () => {
       {/* Main Navigation */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-slate-200' 
-          : 'bg-white/90 backdrop-blur-md shadow-md'
+          ? 'bg-white/95 backdrop-blur-xl shadow-elegant border-b border-accent/20' 
+          : 'bg-white/90 backdrop-blur-md shadow-card'
       } ${isTopSectionVisible ? 'mt-12' : 'mt-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -122,27 +126,27 @@ const Header = () => {
               className="flex items-center space-x-3 group relative"
             >
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-lg shadow-amber-500/20">
-                  <Heart className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-accent via-accent-hover to-accent rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-elegant group-hover:shadow-glow animate-glow-pulse">
+                  <Heart className="h-6 w-6 text-white animate-pulse" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-secondary to-secondary-hover rounded-full flex items-center justify-center animate-spin-slow">
                   <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 </div>
               </div>
               
               <div className="flex flex-col">
                 <div className="flex items-baseline space-x-2">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-700 bg-clip-text text-transparent">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
                     DivineAngel
                   </span>
-                  <span className="text-xs font-semibold bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">
+                  <span className="text-xs font-semibold bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent animate-shimmer">
                     Care
                   </span>
                 </div>
                 <div className="flex items-center space-x-1">
-                  <div className="w-1 h-1 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full"></div>
-                  <p className="text-xs text-slate-600 font-medium tracking-wide">LLC</p>
-                  <div className="w-1 h-1 bg-gradient-to-r from-teal-500 to-amber-500 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gradient-to-r from-accent to-secondary rounded-full animate-pulse"></div>
+                  <p className="text-xs text-muted-foreground font-medium tracking-wide">LLC</p>
+                  <div className="w-1 h-1 bg-gradient-to-r from-secondary to-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
                 </div>
               </div>
             </Link>
@@ -157,10 +161,10 @@ const Header = () => {
                   <div key={item.name} className="relative group">
                     <Link
                       to={item.href}
-                      className={`relative flex items-center space-x-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300 group ${
+                      className={`relative flex items-center space-x-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300 group magnetic-hover ${
                         isActive(item.href)
-                          ? 'text-amber-600 bg-amber-50 shadow-sm border border-amber-100'
-                          : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50'
+                          ? 'text-accent bg-gradient-to-r from-accent/10 to-secondary/10 shadow-card border border-accent/20 glow-effect'
+                          : 'text-foreground hover:text-accent hover:bg-gradient-to-r hover:from-accent/5 hover:to-secondary/5'
                       }`}
                     >
                       <IconComponent className={`h-4 w-4 transition-transform duration-300 ${
@@ -173,7 +177,7 @@ const Header = () => {
                       
                       {/* Active Indicator */}
                       {isActive(item.href) && (
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full animate-scale-in" />
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-gradient-to-r from-accent to-secondary rounded-full animate-scale-in animate-glow-pulse" />
                       )}
                     </Link>
 
@@ -199,13 +203,13 @@ const Header = () => {
               })}
               
               {/* CTA Button */}
-              <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-slate-200">
-                <Button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-semibold px-6 py-2 rounded-xl relative overflow-hidden group">
+              <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-accent/20">
+                <Button className="bg-gradient-to-r from-accent via-accent-hover to-accent hover:from-accent-hover hover:to-accent text-white shadow-elegant hover:shadow-glow transform hover:scale-105 transition-all duration-300 font-semibold px-6 py-2 rounded-xl relative overflow-hidden group magnetic-hover glow-effect">
                   <span className="relative z-10 flex items-center">
                     Get Started
-                    <Sparkles className="h-4 w-4 ml-2" />
+                    <Sparkles className="h-4 w-4 ml-2 group-hover:animate-spin" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Button>
               </div>
             </nav>

@@ -34,6 +34,9 @@ import elderlyWalking from '@/assets/elderly-walking-assistance.jpg';
 import mealPreparation from '@/assets/meal-preparation.jpg';
 import companionshipCare from '@/assets/companionship-care.jpg';
 import seniorReading from '@/assets/senior-reading.jpg';
+import professionalCaregiving from '@/assets/professional-caregiver-assistance.jpg';
+import companionActivities from '@/assets/companion-care-activities.jpg';
+import arizonaFacility from '@/assets/arizona-care-facility.jpg';
 
 const Index = () => {
   const parallaxOffset = useParallax();
@@ -42,14 +45,16 @@ const Index = () => {
   const featuresAnimation = useScrollAnimation(0.2);
   const testimonialsAnimation = useScrollAnimation(0.2);
 
-  // Online graphics and icons
-  const onlineGraphics = {
-    careTeam: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    happyFamily: "https://images.unsplash.com/photo-1584516150909-c43483ee7932?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    medicalCare: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    technology: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    community: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    certification: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+  // Mission-focused caregiving graphics
+  const missionGraphics = {
+    heroBackground: professionalCaregiving,
+    careTeam: caregiverHelping,
+    happyFamily: companionActivities,
+    medicalCare: elderlyWalking,
+    technology: mealPreparation,
+    community: companionshipCare,
+    facility: arizonaFacility,
+    certification: seniorReading
   };
 
   const services = [
@@ -57,28 +62,28 @@ const Index = () => {
       icon: Heart,
       title: 'Personal Care',
       description: 'Assistance with bathing, grooming, dressing, and personal hygiene needs.',
-      graphic: onlineGraphics.careTeam,
+      graphic: missionGraphics.careTeam,
       features: ['Personal Hygiene', 'Mobility Support', '24/7 Care']
     },
     {
       icon: Home,
       title: 'Light Housekeeping',
       description: 'Maintaining a clean, safe living environment with laundry and organization.',
-      graphic: onlineGraphics.medicalCare,
+      graphic: missionGraphics.facility,
       features: ['Home Cleaning', 'Laundry Services', 'Organization']
     },
     {
       icon: Utensils,
       title: 'Meal Preparation',
       description: 'Nutritious meal planning, preparation, and assistance with eating.',
-      graphic: onlineGraphics.technology,
+      graphic: missionGraphics.technology,
       features: ['Meal Planning', 'Special Diets', 'Fresh Ingredients']
     },
     {
       icon: Users,
       title: 'Companionship',
       description: 'Engaging conversation, activities, and emotional support for mental well-being.',
-      graphic: onlineGraphics.community,
+      graphic: missionGraphics.community,
       features: ['Companionship', 'Social Activities', 'Mental Wellness']
     },
   ];
@@ -148,18 +153,20 @@ const Index = () => {
             style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
           >
             <img
-              src={onlineGraphics.careTeam}
-              alt="Professional elderly care services"
+              src={missionGraphics.heroBackground}
+              alt="Professional elderly care services in Arizona"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/50 to-transparent" />
           </div>
           
           {/* Animated Background Elements */}
           <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-20 left-1/4 w-32 h-32 bg-accent/20 rounded-full animate-float blur-2xl" />
-            <div className="absolute bottom-40 right-1/3 w-24 h-24 bg-secondary/20 rounded-full animate-pulse-slow blur-xl" />
-            <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-white/10 rounded-full animate-float blur-lg" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-20 left-1/4 w-32 h-32 bg-accent/30 rounded-full animate-float blur-2xl" />
+            <div className="absolute bottom-40 right-1/3 w-24 h-24 bg-secondary/30 rounded-full animate-pulse-slow blur-xl" />
+            <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-white/20 rounded-full animate-float blur-lg" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-accent/20 rounded-full animate-bounce blur-lg" style={{ animationDelay: '1s' }} />
           </div>
         </div>
         
@@ -258,11 +265,11 @@ const Index = () => {
 
       {/* Enhanced Services Section - Left Aligned */}
       <section className="py-20 bg-background relative overflow-hidden">
-        {/* Background Graphics */}
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-5">
+        {/* Background Mission Graphics */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
           <img 
-            src={onlineGraphics.technology}
-            alt="Care technology background"
+            src={missionGraphics.facility}
+            alt="Arizona care facility background"
             className="w-full h-full object-cover"
           />
         </div>
@@ -371,10 +378,10 @@ const Index = () => {
       {/* Enhanced Features Section - Left Aligned */}
       <section className="py-20 bg-muted relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-10">
           <img 
-            src={onlineGraphics.certification}
-            alt="Certification background"
+            src={missionGraphics.certification}
+            alt="Care certification and quality background"
             className="w-full h-full object-cover"
           />
         </div>
@@ -435,8 +442,8 @@ const Index = () => {
             }`}>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src={onlineGraphics.happyFamily}
-                  alt="Happy family with caregiver"
+                  src={missionGraphics.happyFamily}
+                  alt="Happy family with caregiver in Arizona"
                   className="w-full h-auto group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
