@@ -20,6 +20,7 @@ import {
   Heart,
   Sparkles
 } from 'lucide-react';
+import logo2 from "@/assets/logos/logo2.png"; 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,7 +68,7 @@ const Header = () => {
   return (
     <>
       {/* Top Section - Social & Contact Info */}
-      <div className={`fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-primary via-primary-dark to-secondary text-white transition-all duration-500 ${
+      <div className={`fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-primary via-primary-dark to-primary text-white transition-all duration-500 ${
         isTopSectionVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,7 +91,7 @@ const Header = () => {
 
             {/* Social Links */}
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-white/80 font-medium">Follow Us:</span>
+              <span className="text-sm text-white/90 font-medium">Follow Us:</span>
               <div className="flex items-center space-x-3">
                 {socialLinks.map((social) => {
                   const IconComponent = social.icon;
@@ -98,7 +99,7 @@ const Header = () => {
                     <a
                       key={social.name}
                       href={social.href}
-                      className="text-white/70 hover:text-accent transition-all duration-300 transform hover:scale-110 hover:rotate-6"
+                      className="text-white/90 hover:text-accent transition-all duration-300 transform hover:scale-110 hover:rotate-6"
                       aria-label={social.name}
                     >
                       <IconComponent className="h-4 w-4" />
@@ -118,25 +119,22 @@ const Header = () => {
           : 'bg-white/90 backdrop-blur-md shadow-card'
       } ${isTopSectionVisible ? 'mt-12' : 'mt-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-14">
             
             {/* Logo */}
             <Link 
               to="/" 
               className="flex items-center space-x-3 group relative"
             >
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-accent via-accent-hover to-accent rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-elegant group-hover:shadow-glow animate-glow-pulse">
-                  <Heart className="h-6 w-6 text-white animate-pulse" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-secondary to-secondary-hover rounded-full flex items-center justify-center animate-spin-slow">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                </div>
-              </div>
+              {/* Logo */}
+            <Link to="/" className="flex items-center ">
+              <img src={logo2} alt="Local Icon" className="w-10 h-10 rounded-xl shadow" />
+
+            </Link>
               
               <div className="flex flex-col">
                 <div className="flex items-baseline space-x-2">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+                  <span className="text-xl font-bold bg-gradient-to-r from-blue-900/90  to-secondary bg-clip-text text-transparent">
                     DivineAngel
                   </span>
                   <span className="text-xs font-semibold bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent animate-shimmer">
@@ -161,7 +159,7 @@ const Header = () => {
                   <div key={item.name} className="relative group">
                     <Link
                       to={item.href}
-                      className={`relative flex items-center space-x-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300 group magnetic-hover ${
+                      className={`relative flex items-center space-x-2 px-5 py-2 rounded-xl font-semibold transition-all duration-300 group magnetic-hover ${
                         isActive(item.href)
                           ? 'text-accent bg-gradient-to-r from-accent/10 to-secondary/10 shadow-card border border-accent/20 glow-effect'
                           : 'text-foreground hover:text-accent hover:bg-gradient-to-r hover:from-accent/5 hover:to-secondary/5'
@@ -174,11 +172,7 @@ const Header = () => {
                       {hasSubmenu && (
                         <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
                       )}
-                      
-                      {/* Active Indicator */}
-                      {isActive(item.href) && (
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-gradient-to-r from-accent to-secondary rounded-full animate-scale-in animate-glow-pulse" />
-                      )}
+
                     </Link>
 
                     {/* Dropdown Menu */}
@@ -207,7 +201,7 @@ const Header = () => {
                 <Button className="bg-gradient-to-r from-accent via-accent-hover to-accent hover:from-accent-hover hover:to-accent text-white shadow-elegant hover:shadow-glow transform hover:scale-105 transition-all duration-300 font-semibold px-6 py-2 rounded-xl relative overflow-hidden group magnetic-hover glow-effect">
                   <span className="relative z-10 flex items-center">
                     Get Started
-                    <Sparkles className="h-4 w-4 ml-2 group-hover:animate-spin" />
+                    <Sparkles className="h-4 w-4 ml-2 animate-spin" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Button>

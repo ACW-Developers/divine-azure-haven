@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
@@ -24,9 +24,26 @@ import {
   BadgeCheck,
   TrendingUp,
   MessageCircle,
-  Video
+  Video,
+  Pause,
+  Play, 
+  ChevronLeft, 
+  ChevronRight,
+  ShoppingCart,
+  Activity,
+  Brain,
+  Bed,
+  HandHelping,
+  Scissors
 } from 'lucide-react';
-import heroImage from '@/assets/hero-image.jpg';
+
+// Import your 4 hero background images
+import heroImage1 from '@/assets/professional-caregiver-assistance.jpg';
+import heroImage2 from '@/assets/meal-preparation.jpg';
+import heroImage3 from '@/assets/companionship-care.jpg';
+import heroImage4 from '@/assets/hero-image.jpg';
+
+// Keep your existing imports
 import servicesImage from '@/assets/services-image.jpg';
 import teamImage from '@/assets/team-image.jpg';
 import caregiverHelping from '@/assets/caregiver-helping-senior.jpg';
@@ -38,6 +55,106 @@ import professionalCaregiving from '@/assets/professional-caregiver-assistance.j
 import companionActivities from '@/assets/companion-care-activities.jpg';
 import arizonaFacility from '@/assets/arizona-care-facility.jpg';
 
+// Hero Slideshow Component
+const HeroSlideshow = ({ 
+  images, 
+  currentSlide, 
+  onSlideChange, 
+  isPlaying, 
+  onPlayPause 
+}) => {
+  const progress = useScrollAnimation(0.1);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Background Images with Crossfade */}
+      {images.map((image, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover transform scale-105"
+            style={{
+              transition: 'transform 0.1s ease-out'
+            }}
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/50 to-transparent" />
+        </div>
+      ))}
+      
+      {/* Animated Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 left-1/4 w-32 h-32 bg-accent/30 rounded-full animate-float blur-2xl" />
+        <div className="absolute bottom-40 right-1/3 w-24 h-24 bg-secondary/30 rounded-full animate-pulse-slow blur-xl" />
+        <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-white/20 rounded-full animate-float blur-lg" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-accent/20 rounded-full animate-bounce blur-lg" style={{ animationDelay: '1s' }} />
+      </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20 z-20">
+        <div 
+          className="h-full bg-accent transition-all duration-300 ease-linear"
+          style={{ 
+            width: `${((currentSlide + 1) / images.length) * 100}%` 
+          }}
+        />
+      </div>
+
+      {/* Slideshow Controls */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 z-20">
+        {/* Play/Pause Button */}
+        <button
+          onClick={onPlayPause}
+          className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 magnetic-hover"
+        >
+          {isPlaying ? (
+            <Pause className="w-4 h-4" />
+          ) : (
+            <Play className="w-4 h-4" />
+          )}
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="flex items-center gap-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => onSlideChange(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 magnetic-hover ${
+                index === currentSlide 
+                  ? 'bg-accent scale-125' 
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={() => onSlideChange((currentSlide - 1 + images.length) % images.length)}
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 magnetic-hover z-20 group"
+      >
+        <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+      </button>
+      
+      <button
+        onClick={() => onSlideChange((currentSlide + 1) % images.length)}
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 magnetic-hover z-20 group"
+      >
+        <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+      </button>
+    </div>
+  );
+};
+
 const Index = () => {
   const parallaxOffset = useParallax();
   const heroAnimation = useScrollAnimation(0.1);
@@ -45,7 +162,50 @@ const Index = () => {
   const featuresAnimation = useScrollAnimation(0.2);
   const testimonialsAnimation = useScrollAnimation(0.2);
 
-  // Mission-focused caregiving graphics
+  // Hero slideshow images
+  const heroImages = [
+    {
+      src: heroImage1,
+      alt: 'Professional caregiver assisting senior with daily activities'
+    },
+    {
+      src: heroImage2,
+      alt: 'Companionship and emotional support for elderly clients'
+    },
+    {
+      src: heroImage3,
+      alt: 'Meal preparation and nutrition services for seniors'
+    },
+    {
+      src: heroImage4,
+      alt: 'Happy family with professional caregiver in home setting'
+    }
+  ];
+
+  // Slideshow state
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // Auto-advance slideshow
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isPlaying, heroImages.length]);
+
+  const handleSlideChange = useCallback((index: number) => {
+    setCurrentSlide(index);
+  }, []);
+
+  const handlePlayPause = useCallback(() => {
+    setIsPlaying(!isPlaying);
+  }, [isPlaying]);
+
+  // Mission-focused caregiving graphics (keep your existing graphics)
   const missionGraphics = {
     heroBackground: professionalCaregiving,
     careTeam: caregiverHelping,
@@ -57,35 +217,89 @@ const Index = () => {
     certification: seniorReading
   };
 
+  // Enhanced Services Data with all 12 services
   const services = [
     {
-      icon: Heart,
-      title: 'Personal Care',
-      description: 'Assistance with bathing, grooming, dressing, and personal hygiene needs.',
-      graphic: missionGraphics.careTeam,
-      features: ['Personal Hygiene', 'Mobility Support', '24/7 Care']
-    },
-    {
       icon: Home,
-      title: 'Light Housekeeping',
-      description: 'Maintaining a clean, safe living environment with laundry and organization.',
-      graphic: missionGraphics.facility,
-      features: ['Home Cleaning', 'Laundry Services', 'Organization']
+      title: 'Light Housekeeping & Laundry',
+      description: 'Maintaining a clean, organized, and safe living environment with regular cleaning and laundry services.',
+      image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Home Cleaning', 'Laundry Services', 'Organization', 'Sanitization'],
+      gradient: 'from-green-500/20 to-emerald-500/20',
+      color: 'text-green-600'
     },
     {
       icon: Utensils,
-      title: 'Meal Preparation',
-      description: 'Nutritious meal planning, preparation, and assistance with eating.',
-      graphic: missionGraphics.technology,
-      features: ['Meal Planning', 'Special Diets', 'Fresh Ingredients']
+      title: 'Meal Preparations',
+      description: 'Nutritious, delicious meal planning and preparation tailored to dietary needs and preferences.',
+      image: 'https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Meal Planning', 'Special Diets', 'Fresh Ingredients', 'Nutrition Focus'],
+      gradient: 'from-orange-500/20 to-red-500/20',
+      color: 'text-orange-600'
     },
     {
       icon: Users,
-      title: 'Companionship',
-      description: 'Engaging conversation, activities, and emotional support for mental well-being.',
-      graphic: missionGraphics.community,
-      features: ['Companionship', 'Social Activities', 'Mental Wellness']
+      title: 'Companionship & Social Engagement',
+      description: 'Meaningful conversation, activities, and social interaction to promote mental and emotional well-being.',
+      image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Social Activities', 'Conversation', 'Hobby Support', 'Community Outings'],
+      gradient: 'from-pink-500/20 to-rose-500/20',
+      color: 'text-pink-600'
     },
+    {
+      icon: HandHelping,
+      title: 'Transfer & Ambulating Assistance',
+      description: 'Safe and gentle assistance with moving, walking, and transferring to prevent falls and maintain mobility.',
+      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Safe Transfers', 'Mobility Support', 'Fall Prevention', 'Exercise Assistance'],
+      gradient: 'from-indigo-500/20 to-blue-500/20',
+      color: 'text-indigo-600'
+    },
+    {
+      icon: Pill,
+      title: 'Medication Reminders',
+      description: 'Timely medication reminders and organization to ensure proper adherence to prescribed treatments.',
+      image: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Timely Reminders', 'Dosage Tracking', 'Prescription Management', 'Health Monitoring'],
+      gradient: 'from-purple-500/20 to-violet-500/20',
+      color: 'text-purple-600'
+    },
+    {
+      icon: Scissors,
+      title: 'Personal Hygiene & Grooming',
+      description: 'Dignified assistance with personal care, grooming, and hygiene to maintain confidence and well-being.',
+      image: 'https://images.unsplash.com/photo-1584516150909-c43483ee7932?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Bathing Assistance', 'Grooming Support', 'Oral Care', 'Dressing Help'],
+      gradient: 'from-teal-500/20 to-cyan-500/20',
+      color: 'text-teal-600'
+    },
+    {
+      icon: Car,
+      title: 'Transportation to Appointments',
+      description: 'Reliable transportation to medical appointments, social events, and essential errands.',
+      image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Medical Appointments', 'Social Outings', 'Safe Driving', 'Door-to-Door Service'],
+      gradient: 'from-amber-500/20 to-yellow-500/20',
+      color: 'text-amber-600'
+    },
+    {
+      icon: ShoppingCart,
+      title: 'Errands & Grocery',
+      description: 'Assistance with shopping, errands, and daily necessities to maintain independence and comfort.',
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Grocery Shopping', 'Prescription Pickup', 'Post Office', 'Personal Errands'],
+      gradient: 'from-lime-500/20 to-green-500/20',
+      color: 'text-lime-600'
+    },
+    {
+      icon: Brain,
+      title: 'Dementia & Alzheimer\'s Care',
+      description: 'Specialized care and support for individuals with memory challenges, focusing on safety and dignity.',
+      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      features: ['Memory Support', 'Safety Monitoring', 'Cognitive Activities', 'Family Education'],
+      gradient: 'from-violet-500/20 to-purple-500/20',
+      color: 'text-violet-600'
+    }
   ];
 
   const features = [
@@ -144,31 +358,16 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Enhanced Hero Section - Left Aligned */}
+      {/* Enhanced Hero Section with Slideshow */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Animated Background with Multiple Layers */}
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 parallax-bg"
-            style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
-          >
-            <img
-              src={missionGraphics.heroBackground}
-              alt="Professional elderly care services in Arizona"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60" />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/50 to-transparent" />
-          </div>
-          
-          {/* Animated Background Elements */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-20 left-1/4 w-32 h-32 bg-accent/30 rounded-full animate-float blur-2xl" />
-            <div className="absolute bottom-40 right-1/3 w-24 h-24 bg-secondary/30 rounded-full animate-pulse-slow blur-xl" />
-            <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-white/20 rounded-full animate-float blur-lg" style={{ animationDelay: '2s' }} />
-            <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-accent/20 rounded-full animate-bounce blur-lg" style={{ animationDelay: '1s' }} />
-          </div>
-        </div>
+        {/* Hero Slideshow Component */}
+        <HeroSlideshow
+          images={heroImages}
+          currentSlide={currentSlide}
+          onSlideChange={handleSlideChange}
+          isPlaying={isPlaying}
+          onPlayPause={handlePlayPause}
+        />
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div 
@@ -178,24 +377,24 @@ const Index = () => {
             }`}
           >
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 mb-8 border border-white/30 animate-glow-pulse">
+            <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-4 mt-6 border border-white/30 animate-glow-pulse">
               <BadgeCheck className="w-5 h-5 text-accent" />
               <span className="text-white font-medium text-sm">Arizona's Most Trusted Home Care Provider</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               <span className="block animate-slide-up">Compassionate</span>
               <span className="block text-accent animate-slide-up stagger-2">Care At Home</span>
             </h1>
             
             {/* Subheading */}
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed max-w-3xl animate-fade-in-up stagger-3">
+            <p className="text-xl md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl animate-fade-in-up stagger-3">
               Professional non-medical home care services in Arizona. Helping your loved ones maintain independence and dignity in the comfort of their own home.
             </p>
 
             {/* Stats Row */}
-            <div className="flex flex-wrap gap-8 mb-12 animate-fade-in-up stagger-4">
+            <div className="flex flex-wrap gap-8 mb-8 animate-fade-in-up stagger-4">
               <div className="text-white">
                 <div className="text-3xl font-bold text-accent">500+</div>
                 <div className="text-white/80">Families Served</div>
@@ -222,16 +421,8 @@ const Index = () => {
               </Button>
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-4 magnetic-hover rotate-hover group"
-              >
-                <Video className="mr-2 h-5 w-5 group-hover:scale-110" />
-                Virtual Consultation
-              </Button>
-              <Button 
-                size="lg" 
                 variant="ghost" 
-                className="text-white hover:bg-white/20 text-lg px-8 py-4 magnetic-hover group"
+                className="text-white bg-white/40 hover:bg-white/20 text-lg px-8 py-4 magnetic-hover group"
               >
                 Learn More
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -239,7 +430,7 @@ const Index = () => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 mt-12 text-white/80 text-sm animate-fade-in-up stagger-6">
+            <div className="flex flex-wrap items-center gap-6 mt-8 text-white/80 text-sm animate-fade-in-up stagger-6">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-accent" />
                 <span>Licensed & Insured</span>
@@ -255,120 +446,170 @@ const Index = () => {
             </div>
           </div>
         </div>
-
-        {/* Enhanced Floating Elements */}
-        <div className="absolute bottom-10 left-10 flex items-center gap-4 text-white/80 animate-bounce">
-          <div className="w-2 h-2 bg-accent rounded-full"></div>
-          <span className="text-sm">Scroll to explore</span>
-        </div>
       </section>
+  
 
-      {/* Enhanced Services Section - Left Aligned */}
-      <section className="py-20 bg-background relative overflow-hidden">
-        {/* Background Mission Graphics */}
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
-          <img 
-            src={missionGraphics.facility}
-            alt="Arizona care facility background"
-            className="w-full h-full object-cover"
-          />
+      {/* Enhanced Services Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50/30 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-primary/5 rounded-full animate-float blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent/5 rounded-full animate-pulse-slow blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-secondary/5 rounded-full animate-float-slow blur-3xl" style={{ animationDelay: '3s' }}></div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          {/* Section Header - Left Aligned */}
+          {/* Enhanced Section Header */}
           <div 
             ref={servicesAnimation.elementRef}
-            className={`max-w-4xl transition-all duration-800 mb-16 ${
-              servicesAnimation.isVisible ? 'animate-slide-in-left' : 'opacity-0 transform -translate-x-10'
+            className={`text-center mb-20 transition-all duration-1000 ${
+              servicesAnimation.isVisible ? 'animate-slide-down' : 'opacity-0 transform -translate-y-10'
             }`}
           >
-            <div className="inline-flex items-center gap-2 text-primary mb-4 font-semibold">
-              <Sparkles className="w-4 h-4" />
-              OUR SERVICES
+            <div className="inline-flex items-center gap-3 bg-primary/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-primary/20">
+              <Sparkles className="w-5 h-5 text-primary animate-spin-slow" />
+              <span className="text-primary font-semibold text-sm uppercase tracking-wide">COMPREHENSIVE CARE SERVICES</span>
             </div>
+            
             <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Comprehensive <span className="text-primary">Care Solutions</span> for Every Need
+              Complete <span className="text-primary bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Care Solutions</span> for Every Need
             </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              We provide personalized non-medical home care services designed to support independence and enhance quality of life for seniors across Arizona.
+            
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+              We offer a comprehensive range of professional non-medical home care services designed to support independence, 
+              enhance quality of life, and provide peace of mind for families across Arizona.
             </p>
           </div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Enhanced Services Grid - 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div 
                 key={service.title}
-                className={`group cursor-pointer transition-all duration-500 hover:transform hover:scale-105 ${
-                  servicesAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                className={`group relative transition-all duration-700 hover:transform hover:scale-105 ${
+                  servicesAnimation.isVisible ? 'animate-stagger-fade-in' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-card hover:shadow-card-hover overflow-hidden h-full">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={service.graphic} 
-                        alt={service.title}
-                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute top-4 left-4">
-                        <div className="w-12 h-12 bg-white/90 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                          <service.icon className="w-6 h-6 text-primary" />
-                        </div>
+                {/* Main Card */}
+                <div className="bg-white/80 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl shadow-black/5 hover:shadow-3xl hover:shadow-primary/10 overflow-hidden h-full transition-all duration-500 group-hover:border-primary/30">
+                  {/* Image Container */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                    
+                    {/* Icon Badge */}
+                    <div className="absolute top-4 left-4 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                      <div className="w-14 h-14 bg-white/95 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-lg">
+                        <service.icon className={`w-7 h-7 ${service.color}`} />
                       </div>
                     </div>
-                    
-                    <div className="p-8">
-                      <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-6 leading-relaxed">
-                        {service.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {service.features.map((feature, featureIndex) => (
+
+                    {/* Floating Features */}
+                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                      <div className="flex flex-wrap gap-1 justify-end">
+                        {service.features.slice(0, 2).map((feature, featureIndex) => (
                           <span 
                             key={feature}
-                            className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium transition-all duration-300 group-hover:bg-primary group-hover:text-white"
-                            style={{ animationDelay: `${featureIndex * 0.05}s` }}
+                            className="px-2 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-foreground transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
+                            style={{ animationDelay: `${featureIndex * 0.1 + 0.3}s` }}
                           >
                             {feature}
                           </span>
                         ))}
                       </div>
-                      
-                      <Button variant="ghost" className="group/btn text-primary hover:text-primary-foreground hover:bg-primary px-0">
-                        Learn More
-                        <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                      {service.description}
+                    </p>
+                    
+                    {/* Features Grid */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {service.features.map((feature, featureIndex) => (
+                        <span 
+                          key={feature}
+                          className="px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-50 text-slate-700 rounded-xl text-xs font-medium transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary group-hover:shadow-sm transform hover:scale-105 cursor-default"
+                          style={{ animationDelay: `${featureIndex * 0.05}s` }}
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/0 via-primary/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                </div>
+
+                {/* Floating Animation Element */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-20 animate-pulse-slow" />
               </div>
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <div className={`mt-16 text-left ${
+          {/* Enhanced Bottom CTA */}
+          <div className={`mt-20 text-center ${
             servicesAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.6s' }}>
-            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-8 backdrop-blur-sm border border-primary/20">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
-                    Need Custom Care Solutions?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Every family is unique. Let's create a personalized care plan that fits your specific needs.
-                  </p>
+          }`} style={{ animationDelay: '1.2s' }}>
+            <div className="bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 rounded-3xl p-12 backdrop-blur-sm border border-primary/20 relative overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full animate-float"></div>
+                <div className="absolute bottom-0 right-0 w-24 h-24 bg-accent rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+              </div>
+              
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold text-foreground mb-4">
+                  Ready to Create Your Custom Care Plan?
+                </h3>
+                <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  Every family's needs are unique. Let us work with you to design a personalized care solution that perfectly fits your loved one's requirements and preferences.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 magnetic-hover group">
+                    <MessageCircle className="mr-3 w-5 h-5 group-hover:scale-110 transition-transform" />
+                    Get Your Personalized Plan
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                  </Button>
+                  
+                  <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 text-lg group">
+                    <MapPin className="mr-3 w-5 h-5 group-hover:scale-110 transition-transform" />
+                    View Service Areas
+                  </Button>
                 </div>
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4">
-                  <MessageCircle className="mr-2 w-5 h-5" />
-                  Get Personalized Plan
-                </Button>
+
+                {/* Trust Badges */}
+                <div className="flex flex-wrap justify-center items-center gap-6 mt-8 pt-8 border-t border-primary/10">
+                  {[
+                    { icon: Shield, text: 'Licensed & Insured' },
+                    { icon: Clock, text: '24/7 Availability' },
+                    { icon: Heart, text: 'Compassionate Care' },
+                    { icon: Users, text: 'Trained Professionals' }
+                  ].map((badge, index) => (
+                    <div 
+                      key={badge.text}
+                      className="flex items-center gap-2 text-sm text-muted-foreground animate-fade-in-up"
+                      style={{ animationDelay: `${1.4 + index * 0.1}s` }}
+                    >
+                      <badge.icon className="w-4 h-4 text-primary" />
+                      <span>{badge.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
