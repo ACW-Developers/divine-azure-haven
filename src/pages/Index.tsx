@@ -22,6 +22,11 @@ import {
 import heroImage from '@/assets/hero-image.jpg';
 import servicesImage from '@/assets/services-image.jpg';
 import teamImage from '@/assets/team-image.jpg';
+import caregiverHelping from '@/assets/caregiver-helping-senior.jpg';
+import elderlyWalking from '@/assets/elderly-walking-assistance.jpg';
+import mealPreparation from '@/assets/meal-preparation.jpg';
+import companionshipCare from '@/assets/companionship-care.jpg';
+import seniorReading from '@/assets/senior-reading.jpg';
 
 const Index = () => {
   const parallaxOffset = useParallax();
@@ -201,34 +206,86 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card 
-                key={service.title} 
-                className={`group hover:shadow-card-hover transition-all duration-500 border-card-border bg-gradient-card magnetic-hover glow-effect ${
-                  servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
-                }`}
-                style={{ 
-                  animationDelay: servicesAnimation.isVisible ? `${index * 0.1}s` : '0s'
-                }}
-              >
-                <CardContent className="p-8 relative overflow-hidden">
-                  {/* Card Background Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 pulse-glow relative">
-                    <service.icon className="h-8 w-8 text-primary-foreground group-hover:animate-bounce" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                  
-                  {/* Hover Sparkle Effect */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Sparkles className="h-5 w-5 text-accent animate-pulse-glow" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            {/* Service Card 1 */}
+            <div className={`bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-card-hover p-8 magnetic-hover group ${
+              servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            }`} style={{ animationDelay: '0.1s' }}>
+              <img 
+                src={caregiverHelping} 
+                alt="Professional caregiver assisting elderly client with daily activities" 
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-elegant group-hover:scale-105 transition-transform duration-500"
+              />
+              <h3 className="text-2xl font-bold text-primary mb-4 animate-fade-in-up">Personal Care Excellence</h3>
+              <p className="text-muted-foreground mb-4">
+                Our certified caregivers provide compassionate assistance with daily activities, ensuring dignity and comfort in every interaction.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Personal Hygiene</span>
+                <span className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Mobility Support</span>
+                <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">24/7 Care</span>
+              </div>
+            </div>
+
+            {/* Service Card 2 */}
+            <div className={`bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-card-hover p-8 magnetic-hover group ${
+              servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            }`} style={{ animationDelay: '0.2s' }}>
+              <img 
+                src={mealPreparation} 
+                alt="Caregiver preparing nutritious meal for elderly client" 
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-elegant group-hover:scale-105 transition-transform duration-500"
+              />
+              <h3 className="text-2xl font-bold text-primary mb-4 animate-fade-in-up">Nutritional Wellness</h3>
+              <p className="text-muted-foreground mb-4">
+                Specialized meal preparation services ensuring proper nutrition and dietary requirements are met with delicious, healthy meals.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Meal Planning</span>
+                <span className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Special Diets</span>
+                <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Fresh Ingredients</span>
+              </div>
+            </div>
+
+            {/* Service Card 3 */}
+            <div className={`bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-card-hover p-8 magnetic-hover group ${
+              servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            }`} style={{ animationDelay: '0.3s' }}>
+              <img 
+                src={companionshipCare} 
+                alt="Elderly person enjoying companionship with caregiver" 
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-elegant group-hover:scale-105 transition-transform duration-500"
+              />
+              <h3 className="text-2xl font-bold text-primary mb-4 animate-fade-in-up">Emotional Support</h3>
+              <p className="text-muted-foreground mb-4">
+                Beyond physical care, we provide meaningful companionship to enhance quality of life and emotional wellbeing.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Companionship</span>
+                <span className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Social Activities</span>
+                <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Mental Wellness</span>
+              </div>
+            </div>
+
+            {/* Service Card 4 */}
+            <div className={`bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-card-hover p-8 magnetic-hover group ${
+              servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            }`} style={{ animationDelay: '0.4s' }}>
+              <img 
+                src={elderlyWalking} 
+                alt="Caregiver assisting elderly person with safe walking and mobility" 
+                className="w-full h-64 object-cover rounded-xl mb-6 shadow-elegant group-hover:scale-105 transition-transform duration-500"
+              />
+              <h3 className="text-2xl font-bold text-primary mb-4 animate-fade-in-up">Mobility & Safety</h3>
+              <p className="text-muted-foreground mb-4">
+                Professional assistance with walking, transfers, and daily mobility to ensure safety and maintain independence.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Safe Transfers</span>
+                <span className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Fall Prevention</span>
+                <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Exercise Support</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -310,7 +367,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Enhanced Testimonials Section */}
       <section className="py-20 bg-background relative overflow-hidden">
         {/* Floating Background Elements */}
         <div className="absolute top-10 left-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl animate-float" />
@@ -325,54 +382,108 @@ const Index = () => {
           >
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
               What Families <span className="text-primary relative">
-                Say
-                <div className="absolute -top-2 -right-2">
-                  <Sparkles className="h-6 w-6 text-accent animate-pulse-glow" />
-                </div>
+                Say About Us
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-primary rounded-full animate-shimmer" />
               </span>
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Hear from the families we've had the privilege to serve.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Real experiences from the families we've had the privilege to serve across Arizona
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card 
-                key={testimonial.name} 
-                className={`bg-gradient-card border-card-border shadow-card hover:shadow-card-hover transition-all duration-700 group magnetic-hover glow-effect ${
-                  testimonialsAnimation.isVisible ? 'animate-rotate-in' : 'opacity-0 transform rotate-12 scale-75'
-                }`}
-                style={{ 
-                  animationDelay: testimonialsAnimation.isVisible ? `${index * 0.2}s` : '0s'
-                }}
-              >
-                <CardContent className="p-8 relative overflow-hidden">
-                  {/* Quote Background Effect */}
-                  <div className="absolute top-4 left-4 text-6xl text-primary/10 font-serif leading-none select-none">"</div>
-                  
-                  <div className="flex items-center mb-4 relative z-10">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`h-5 w-5 text-accent fill-current group-hover:animate-bounce transition-all duration-300`}
-                        style={{ animationDelay: `${i * 0.1}s` }}
-                      />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              {[
+                {
+                  text: "DivineAngel Care has been a blessing for our family. Their caregivers are not only professional but genuinely caring. Mom loves spending time with her caregiver, Sarah.",
+                  author: "Maria Rodriguez",
+                  location: "Phoenix, AZ",
+                  rating: 5,
+                  service: "Personal Care & Companionship"
+                },
+                {
+                  text: "The meal preparation service has made such a difference in Dad's nutrition and overall health. He actually looks forward to every meal now!",
+                  author: "James Wilson", 
+                  location: "Scottsdale, AZ",
+                  rating: 5,
+                  service: "Meal Preparation & Nutrition"
+                },
+                {
+                  text: "Professional, reliable, and truly caring. The peace of mind knowing my father is in good hands while I'm at work is invaluable.",
+                  author: "Linda Chen",
+                  location: "Tucson, AZ", 
+                  rating: 5,
+                  service: "Daily Living Assistance"
+                }
+              ].map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className={`
+                    bg-gradient-card backdrop-blur-lg rounded-2xl p-8 
+                    shadow-card hover:shadow-card-hover border-card-border
+                    transition-all duration-500 group magnetic-hover
+                    ${testimonialsAnimation.isVisible ? 'animate-slide-in-left' : 'opacity-0 transform -translate-x-10'}
+                  `}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <div className="flex mb-4">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-accent text-accent animate-bounce-in group-hover:animate-bounce" style={{ animationDelay: `${i * 0.1}s` }} />
                     ))}
                   </div>
-                  <p className="text-muted-foreground italic mb-6 leading-relaxed relative z-10 group-hover:text-foreground transition-colors duration-300">
-                    "{testimonial.content}"
+                  <p className="text-foreground text-lg mb-6 leading-relaxed italic group-hover:text-primary transition-colors duration-300">
+                    "{testimonial.text}"
                   </p>
-                  <div className="relative z-10">
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors duration-300">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <div className="border-l-4 border-gradient-primary pl-6 relative">
+                    <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-primary rounded-full animate-pulse-glow"></div>
+                    <p className="font-bold text-primary text-lg">{testimonial.author}</p>
+                    <p className="text-muted-foreground text-sm">{testimonial.location}</p>
+                    <p className="text-secondary text-sm font-medium">{testimonial.service}</p>
                   </div>
-                  
-                  {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+            </div>
+            
+            <div className={`relative group ${testimonialsAnimation.isVisible ? 'animate-slide-in-right' : 'opacity-0 transform translate-x-10'}`} style={{ animationDelay: '0.6s' }}>
+              <div className="relative overflow-hidden rounded-2xl shadow-elegant">
+                <img 
+                  src={seniorReading} 
+                  alt="Happy senior enjoying quality time with professional caregiver" 
+                  className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent group-hover:from-primary/40 transition-all duration-500"></div>
+                
+                {/* Floating stats */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 text-center animate-bounce-in">
+                      <div className="text-2xl font-bold text-primary">500+</div>
+                      <div className="text-sm text-muted-foreground">Families Served</div>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 text-center animate-bounce-in" style={{ animationDelay: '0.2s' }}>
+                      <div className="text-2xl font-bold text-accent">99%</div>
+                      <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-8 flex flex-wrap gap-4 justify-center">
+                <div className="inline-flex items-center gap-2 bg-gradient-primary px-4 py-2 rounded-full text-primary-foreground text-sm font-semibold shadow-card animate-pulse-glow">
+                  <Shield className="w-4 h-4" />
+                  <span>Licensed & Insured</span>
+                </div>
+                <div className="inline-flex items-center gap-2 bg-gradient-secondary px-4 py-2 rounded-full text-secondary-foreground text-sm font-semibold shadow-card animate-pulse-glow" style={{ animationDelay: '0.3s' }}>
+                  <Heart className="w-4 h-4" />
+                  <span>Compassionate Care</span>
+                </div>
+                <div className="inline-flex items-center gap-2 bg-gradient-accent px-4 py-2 rounded-full text-accent-foreground text-sm font-semibold shadow-card animate-pulse-glow" style={{ animationDelay: '0.6s' }}>
+                  <Clock className="w-4 h-4" />
+                  <span>24/7 Support</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

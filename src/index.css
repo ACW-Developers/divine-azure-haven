@@ -14,22 +14,22 @@
     --foreground: 215 25% 15%;
 
     /* Navy Blue - Primary (Trust & Professionalism) */
-    --primary: 215 85% 25%;
+    --primary: 220 100% 15%;
     --primary-foreground: 210 40% 98%;
-    --primary-hover: 215 85% 30%;
-    --primary-light: 215 65% 85%;
+    --primary-hover: 220 100% 20%;
+    --primary-light: 220 65% 85%;
 
-    /* Sky Blue - Secondary (Calm & Healing) */
-    --secondary: 195 85% 70%;
-    --secondary-foreground: 215 25% 15%;
-    --secondary-hover: 195 85% 65%;
-    --secondary-light: 195 65% 92%;
+    /* Light Blue - Secondary (Calm & Healing) */
+    --secondary: 190 100% 75%;
+    --secondary-foreground: 220 25% 15%;
+    --secondary-hover: 190 100% 70%;
+    --secondary-light: 190 65% 92%;
 
-    /* Red Accent - Care & Warmth */
-    --accent: 5 85% 60%;
+    /* Orange Accent - Warmth & Care */
+    --accent: 25 100% 55%;
     --accent-foreground: 210 40% 98%;
-    --accent-hover: 5 85% 55%;
-    --accent-light: 5 65% 92%;
+    --accent-hover: 25 100% 50%;
+    --accent-light: 25 65% 92%;
 
     /* Card & Surface Colors */
     --card: 210 30% 99%;
@@ -53,17 +53,17 @@
     --radius: 0.75rem;
 
     /* Healthcare Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(215 85% 25%), hsl(215 85% 35%));
-    --gradient-secondary: linear-gradient(135deg, hsl(195 85% 70%), hsl(195 85% 80%));
-    --gradient-hero: linear-gradient(135deg, hsl(215 85% 25%) 0%, hsl(195 85% 70%) 50%, hsl(5 85% 60%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(220 100% 15%), hsl(220 100% 25%));
+    --gradient-secondary: linear-gradient(135deg, hsl(190 100% 75%), hsl(190 100% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 100% 15%) 0%, hsl(190 100% 75%) 50%, hsl(25 100% 55%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(210 30% 99%), hsl(210 25% 96%));
-    --gradient-accent: linear-gradient(135deg, hsl(5 85% 60%), hsl(5 85% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(25 100% 55%), hsl(25 100% 65%));
 
     /* Elegant Shadows */
-    --shadow-card: 0 4px 25px -2px hsl(215 85% 25% / 0.08);
-    --shadow-card-hover: 0 8px 35px -5px hsl(215 85% 25% / 0.15);
-    --shadow-hero: 0 10px 40px -10px hsl(215 85% 25% / 0.2);
-    --shadow-elegant: 0 20px 60px -20px hsl(215 85% 25% / 0.25);
+    --shadow-card: 0 4px 25px -2px hsl(220 100% 15% / 0.08);
+    --shadow-card-hover: 0 8px 35px -5px hsl(220 100% 15% / 0.15);
+    --shadow-hero: 0 10px 40px -10px hsl(220 100% 15% / 0.2);
+    --shadow-elegant: 0 20px 60px -20px hsl(220 100% 15% / 0.25);
 
     /* Advanced Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -83,23 +83,23 @@
     --popover: 215 25% 18%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 195 85% 70%;
-    --primary-foreground: 215 25% 15%;
-    --primary-hover: 195 85% 65%;
-    --primary-light: 195 65% 25%;
+    --primary: 190 100% 75%;
+    --primary-foreground: 220 25% 15%;
+    --primary-hover: 190 100% 70%;
+    --primary-light: 190 65% 25%;
 
-    --secondary: 215 65% 25%;
+    --secondary: 220 65% 25%;
     --secondary-foreground: 210 40% 98%;
-    --secondary-hover: 215 65% 20%;
-    --secondary-light: 215 65% 20%;
+    --secondary-hover: 220 65% 20%;
+    --secondary-light: 220 65% 20%;
 
-    --muted: 215 25% 22%;
-    --muted-foreground: 215 15% 65%;
+    --muted: 220 25% 22%;
+    --muted-foreground: 220 15% 65%;
 
-    --accent: 5 85% 60%;
+    --accent: 25 100% 55%;
     --accent-foreground: 210 40% 98%;
-    --accent-hover: 5 85% 55%;
-    --accent-light: 5 65% 25%;
+    --accent-hover: 25 100% 50%;
+    --accent-light: 25 65% 25%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -109,11 +109,11 @@
     --ring: 195 85% 70%;
 
     /* Dark Mode Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 85% 70%), hsl(195 85% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(215 65% 25%), hsl(215 65% 35%));
-    --gradient-hero: linear-gradient(135deg, hsl(215 25% 15%) 0%, hsl(195 85% 70%) 50%, hsl(5 85% 60%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(215 25% 18%), hsl(215 25% 22%));
-    --gradient-accent: linear-gradient(135deg, hsl(5 85% 60%), hsl(5 85% 70%));
+    --gradient-primary: linear-gradient(135deg, hsl(190 100% 75%), hsl(190 100% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220 65% 25%), hsl(220 65% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 25% 15%) 0%, hsl(190 100% 75%) 50%, hsl(25 100% 55%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(220 25% 18%), hsl(220 25% 22%));
+    --gradient-accent: linear-gradient(135deg, hsl(25 100% 55%), hsl(25 100% 65%));
   }
 }
 
