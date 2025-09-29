@@ -472,7 +472,7 @@ const Index = () => {
             </div>
             
             <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Complete <span className="text-primary bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Care Solutions</span> for Every Need
+              Complete <span className="text-primary bg-gradient-to-r from-primary to-accent bg-clip-text">Care Solutions</span> for Every Need
             </h2>
             
             <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">

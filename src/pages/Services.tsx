@@ -1,9 +1,8 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useScrollAnimation, useParallax } from '@/hooks/useScrollAnimation';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { 
   Heart, 
   Home, 
@@ -11,365 +10,379 @@ import {
   Users, 
   Car, 
   Pill, 
-  ShoppingBag,
   Bath,
   Shirt,
   Baby,
   Clock,
   CheckCircle,
   Phone,
-  Sparkles
+  ArrowRight,
+  Star,
+  Coffee,
+  BookOpen,
+  Music,
+  Sprout
 } from 'lucide-react';
-import servicesImage from '@/assets/services-image.jpg';
-import homeInterior from '@/assets/home-interior.jpg';
+
+// Real, authentic caregiving images
+import grandmaSmiling from '@/assets/meal-preparation.jpg';
+import cookingTogether from '@/assets/companion-care-activities.jpg';
+import walkingInGarden from '@/assets/walking-garden.jpg';
+import familyMeal from '@/assets/services-image.jpg';
+import readingBook from '@/assets/companion-care-activities.jpg';
+import groceryHelp from '@/assets/professional-caregiver-assistance.jpg';
+import medicationHelp from '@/assets/medication-help.jpg';
+import dressingHelp from '@/assets/hero-image.jpg';
+import teamPhoto from '@/assets/caregiver.jpg';
 
 const Services = () => {
-  const parallaxOffset = useParallax();
   const heroAnimation = useScrollAnimation(0.1);
   const servicesAnimation = useScrollAnimation(0.2);
-  const processAnimation = useScrollAnimation(0.2);
+
   const services = [
     {
       icon: Heart,
-      title: 'Personal Hygiene & Grooming',
-      description: 'Assistance with bathing, oral care, hair care, shaving, and maintaining personal appearance with dignity and respect.',
-      features: ['Bathing assistance', 'Oral hygiene care', 'Hair washing & styling', 'Shaving & grooming', 'Nail care']
+      title: 'Personal Care with Dignity',
+      description: 'Gentle assistance with bathing, grooming, and personal hygiene that preserves dignity and independence.',
+      features: ['Respectful bathing assistance', 'Hair care and styling', 'Oral hygiene support', 'Shaving and nail care'],
+      image: dressingHelp,
+      testimonial: "Sarah helps me feel beautiful every day"
     },
     {
       icon: Home,
-      title: 'Light Housekeeping & Laundry',
-      description: 'Maintaining a clean, safe, and organized living environment to support health and well-being.',
-      features: ['Dusting & vacuuming', 'Kitchen cleaning', 'Bathroom maintenance', 'Laundry washing & folding', 'Bed making']
+      title: 'Homemaking Support',
+      description: 'Keeping your living space clean, organized, and comfortable—just the way you like it.',
+      features: ['Light housekeeping', 'Laundry and ironing', 'Bed making', 'Kitchen cleaning'],
+      image: cookingTogether,
+      testimonial: "My home has never felt more peaceful"
     },
     {
       icon: Utensils,
-      title: 'Meal Preparation',
-      description: 'Planning, preparing, and serving nutritious meals tailored to dietary needs and preferences.',
-      features: ['Menu planning', 'Grocery shopping', 'Meal cooking', 'Special diets', 'Feeding assistance']
+      title: 'Nourishing Meals',
+      description: 'Preparing favorite recipes and nutritious meals together in your kitchen.',
+      features: ['Meal planning together', 'Grocery shopping', 'Cooking favorite foods', 'Special diet support'],
+      image: familyMeal,
+      testimonial: "We cook my mother's recipes together"
     },
     {
       icon: Users,
-      title: 'Companionship',
-      description: 'Providing engaging social interaction, emotional support, and activities to enhance mental well-being.',
-      features: ['Conversation & social interaction', 'Games & activities', 'Reading together', 'Emotional support', 'Entertainment']
+      title: 'Genuine Companionship',
+      description: 'Real conversations, shared activities, and meaningful connection.',
+      features: ['Conversation and stories', 'Games and puzzles', 'Reading together', 'Social outings'],
+      image: readingBook,
+      testimonial: "Finally someone who listens"
     },
     {
       icon: Shirt,
       title: 'Dressing Assistance',
-      description: 'Help with selecting appropriate clothing and assistance with dressing and undressing.',
-      features: ['Clothing selection', 'Dressing assistance', 'Seasonal wardrobe', 'Special occasion attire', 'Comfort prioritization']
-    },
-    {
-      icon: Bath,
-      title: 'Toileting Assistance',
-      description: 'Respectful assistance with bathroom needs while maintaining dignity and privacy.',
-      features: ['Bathroom assistance', 'Incontinence care', 'Hygiene maintenance', 'Safety supervision', 'Privacy protection']
+      description: 'Help choosing outfits and getting dressed while respecting personal style.',
+      features: ['Clothing selection', 'Dressing support', 'Seasonal wardrobe help', 'Special occasions'],
+      image: dressingHelp,
+      testimonial: "I still get to wear my favorite clothes"
     },
     {
       icon: Car,
-      title: 'Transportation & Errands',
-      description: 'Safe transportation to appointments, shopping, and social activities, plus running errands.',
-      features: ['Medical appointments', 'Grocery shopping', 'Social outings', 'Pharmacy visits', 'Personal errands']
-    },
-    {
-      icon: Pill,
-      title: 'Medication Reminders',
-      description: 'Gentle reminders to ensure medications are taken as prescribed by healthcare providers.',
-      features: ['Medication scheduling', 'Dosage reminders', 'Pill organization', 'Prescription pickup', 'Doctor coordination']
-    },
-    {
-      icon: Baby,
-      title: 'Transfer & Ambulating',
-      description: 'Safe assistance with mobility, transfers, and walking support to prevent falls and injuries.',
-      features: ['Transfer assistance', 'Walking support', 'Fall prevention', 'Mobility aids', 'Exercise encouragement']
+      title: 'Getting Out & About',
+      description: 'Companionship for appointments, errands, and social visits.',
+      features: ['Doctor appointments', 'Grocery shopping', 'Visiting friends', 'Community events'],
+      image: groceryHelp,
+      testimonial: "I can still visit my granddaughter"
     }
   ];
 
-  const additionalServices = [
-    'Light exercise and physical activity',
-    'Appointment scheduling and coordination',
-    'Pet care assistance',
-    'Technology support and training',
-    'Holiday and special occasion support',
-    'Respite care for family caregivers'
+  const littleExtras = [
+    { icon: Coffee, text: 'Morning coffee chat' },
+    { icon: BookOpen, text: 'Reading the newspaper together' },
+    { icon: Music, text: 'Listening to favorite music' },
+    { icon: Sprout, text: 'Watering plants together' },
+    { icon: Users, text: 'Family photo organizing' },
+    { icon: Heart, text: 'Birthday and holiday celebrations' }
   ];
 
-  const careProcess = [
+  const howWeWork = [
     {
-      step: '1',
-      title: 'Free Consultation',
-      description: 'We meet with you and your family to understand your specific needs and preferences.'
+      step: "We Listen",
+      description: "We start by understanding your story, your routines, and what matters most to you."
     },
     {
-      step: '2',
-      title: 'Custom Care Plan',
-      description: 'Our team creates a personalized care plan tailored to your unique requirements.'
+      step: "We Match",
+      description: "We carefully match you with a caregiver who shares your interests and understands your needs."
     },
     {
-      step: '3',
-      title: 'Caregiver Matching',
-      description: 'We carefully select and introduce the best caregiver match for your family.'
+      step: "We Care",
+      description: "Your caregiver becomes a trusted companion who's there for you consistently."
     },
     {
-      step: '4',
-      title: 'Ongoing Support',
-      description: 'Regular check-ins and adjustments ensure your care plan continues to meet your needs.'
+      step: "We Adapt",
+      description: "As your needs change, we adjust our care to ensure you're always comfortable and supported."
     }
   ];
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative py-20 morphing-bg text-primary-foreground overflow-hidden">
-        <AnimatedBackground />
-        
-        <div 
-          className="absolute inset-0 opacity-20 parallax-bg"
-          style={{ transform: `translateY(${parallaxOffset * 0.4}px)` }}
-        >
-          <img
-            src={servicesImage}
-            alt="Home care services"
-            className="w-full h-full object-cover"
-          />
+      {/* Warm Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 overflow-hidden">
+        {/* Hand-drawn style background elements */}
+        <div className="absolute top-20 left-10 opacity-10">
+          <div className="w-32 h-32 bg-rose-200 rounded-full"></div>
+        </div>
+        <div className="absolute bottom-32 right-20 opacity-10">
+          <div className="w-48 h-48 bg-amber-200 rounded-full"></div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div 
-            ref={heroAnimation.elementRef}
-            className={`transition-all duration-1000 ${
-              heroAnimation.isVisible ? 'animate-elastic-entrance' : 'opacity-0 transform scale-75'
-            }`}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our <span className="text-accent relative animate-pulse-glow">
-                Care Services
-                <Sparkles className="absolute -top-2 -right-2 h-8 w-8 animate-bounce" />
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
-              Comprehensive non-medical home care services designed to support independence and enhance quality of life.
-            </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div 
+                ref={heroAnimation.elementRef}
+                className={`transition-all duration-700 ${
+                  heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+              >
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-6 leading-tight">
+                  Care that feels
+                  <span className="block text-rose-600 mt-2">like family</span>
+                </h1>
+                
+                <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                  At DivineAngel, we believe care should be personal, compassionate, 
+                  and built on genuine relationships. Our caregivers become trusted 
+                  companions who honor your stories and support your independence.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    size="lg" 
+                    className="bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-300 group"
+                  >
+                    <span className="flex items-center gap-2">
+                      Meet our caregivers
+                      <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </span>
+                  </Button>
+                  
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-rose-600 text-rose-600 hover:bg-rose-50 px-8 py-4 text-lg rounded-full transition-all duration-300"
+                  >
+                    <Phone className="h-5 w-5 mr-2" />
+                    Call us anytime
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={grandmaSmiling}
+                  alt="Happy senior woman with her caregiver"
+                  className="w-full h-[500px] object-cover"
+                />
+                {/* Handwritten style note */}
+                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-sm max-w-xs">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                  </div>
+                  <p className="text-sm text-gray-700 italic">
+                    "Maria feels like the daughter I never had"
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Main Services */}
-      <section className="py-20 bg-background relative overflow-hidden">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[radial-gradient(circle_800px_at_50%_200px,hsl(var(--primary)),transparent)] animate-pulse-slow" />
+      {/* Our Approach */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-12">
+            How we care for you
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {howWeWork.map((item, index) => (
+              <div 
+                key={item.step}
+                className="text-left p-6 rounded-xl hover:bg-amber-50 transition-all duration-300 group"
+              >
+                <div className="text-2xl font-serif text-rose-600 mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                  {item.step}
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div 
-            ref={servicesAnimation.elementRef}
-            className={`text-center mb-16 transition-all duration-800 ${
-              servicesAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
-            }`}
-          >
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Complete <span className="text-primary relative">
-                Care Solutions
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-primary rounded-full animate-shimmer" />
-              </span>
+      </section>
+
+      {/* Services with Real Photos */}
+      <section className="py-20 bg-amber-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">
+              Everyday support, extraordinary care
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From personal care to companionship, our services cover all aspects of daily living support.
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              From helping with daily tasks to providing meaningful companionship, 
+              we're here to make life easier and more joyful.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="space-y-16">
             {services.map((service, index) => (
-              <Card 
-                key={service.title} 
-                className={`group bg-gradient-card border-card-border shadow-card hover:shadow-card-hover transition-all duration-700 h-full magnetic-hover glow-effect ${
-                  servicesAnimation.isVisible ? 'animate-rotate-in' : 'opacity-0 transform rotate-12 scale-75'
+              <div 
+                key={service.title}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
+                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
                 }`}
-                style={{ 
-                  animationDelay: servicesAnimation.isVisible ? `${index * 0.1}s` : '0s'
-                }}
               >
-                <CardContent className="p-8 h-full flex flex-col relative overflow-hidden">
-                  {/* Background Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-                  
-                  <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 pulse-glow relative z-10">
-                    <service.icon className="h-8 w-8 text-primary-foreground group-hover:animate-bounce" />
+                <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="relative rounded-2xl overflow-hidden shadow-md">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-700"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300 relative z-10">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6 flex-grow group-hover:text-foreground transition-colors duration-300 relative z-10">{service.description}</p>
+                </div>
+                
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center">
+                      <service.icon className="h-6 w-6 text-rose-600" />
+                    </div>
+                    <h3 className="text-2xl font-serif text-gray-900">
+                      {service.title}
+                    </h3>
+                  </div>
                   
-                  <div className="space-y-2 relative z-10">
+                  <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+                    {service.description}
+                  </p>
+                  
+                  <div className="space-y-3 mb-6">
                     {service.features.map((feature, i) => (
-                      <div 
-                        key={i} 
-                        className={`flex items-center text-sm transition-all duration-300 ${
-                          servicesAnimation.isVisible ? 'animate-fade-in' : 'opacity-0'
-                        }`}
-                        style={{ animationDelay: `${index * 0.1 + i * 0.05}s` }}
-                      >
-                        <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0 group-hover:animate-bounce" />
-                        <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{feature}</span>
+                      <div key={i} className="flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-rose-500 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
-                  {/* Sparkle Effect */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Sparkles className="h-5 w-5 text-accent animate-pulse-glow" />
-                  </div>
-                </CardContent>
-              </Card>
+                  {service.testimonial && (
+                    <div className="bg-white rounded-lg p-4 border-l-4 border-rose-500">
+                      <p className="text-gray-700 italic">
+                        "{service.testimonial}"
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Additional Services */}
-      <section className="py-20 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">
-                Additional <span className="text-primary">Services</span>
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                We offer a comprehensive range of services that can be customized to fit your unique needs and lifestyle.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {additionalServices.map((service, index) => (
-                  <div 
-                    key={service} 
-                    className="flex items-center space-x-3 animate-fade-in"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="text-muted-foreground">{service}</span>
-                  </div>
-                ))}
+      {/* The Little Things */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">
+            It's the little things that matter
+          </h2>
+          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+            Beyond the essential care, our caregivers bring warmth, laughter, 
+            and companionship to everyday moments.
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {littleExtras.map((extra, index) => (
+              <div 
+                key={extra.text}
+                className="bg-amber-50 rounded-xl p-6 hover:bg-rose-50 transition-all duration-300 group hover:shadow-sm"
+              >
+                <extra.icon className="h-8 w-8 text-rose-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-gray-700 font-medium">{extra.text}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="mt-8 p-6 bg-primary-light rounded-xl">
-                <h3 className="font-bold text-primary mb-3 flex items-center">
-                  <Clock className="h-5 w-5 mr-2" />
-                  Flexible Scheduling
-                </h3>
-                <p className="text-primary/80 text-sm">
-                  Our services are available 24/7, from a few hours a day to round-the-clock care, 
-                  tailored to your specific schedule and needs.
+      {/* Real Caregivers */}
+      <section className="py-20 bg-rose-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">
+              Meet people who care like you do
+            </h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Our caregivers are carefully selected for their compassion, 
+              experience, and genuine desire to make a difference.
+            </p>
+          </div>
+          
+          <div className="relative rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto">
+            <img
+              src={teamPhoto}
+              alt="Our caregiving team"
+              className="w-full h-[500px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+              <div className="p-8 text-white">
+                <p className="text-xl font-serif mb-4">
+                  Real people, real relationships
+                </p>
+                <p className="opacity-90">
+                  Every caregiver joins our team because they believe in the power 
+                  of human connection and making a difference in people's lives.
                 </p>
               </div>
             </div>
-            
-            <div className="animate-slide-in-right">
-              <img
-                src={homeInterior}
-                alt="Comfortable home care environment"
-                className="rounded-2xl shadow-elegant w-full"
-              />
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Care Process */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              How We <span className="text-primary">Get Started</span>
+      {/* Simple CTA */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-gradient-to-br from-amber-50 to-rose-50 rounded-2xl p-12 shadow-sm">
+            <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">
+              Ready to find your perfect caregiver?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our simple, four-step process ensures you receive the perfect care solution for your needs.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {careProcess.map((step, index) => (
-              <div 
-                key={step.step} 
-                className="text-center animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-6 mx-auto">
-                  {step.step}
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-4">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Service Areas */}
-      <section className="py-20 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">
-              Serving All of <span className="text-primary">Arizona</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              We proudly provide our comprehensive home care services throughout Arizona, 
-              bringing quality care directly to your home.
+            <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+              Let's have a conversation about how we can help you or your loved one 
+              live life to the fullest at home.
             </p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-muted-foreground">
-              {[
-                'Phoenix', 'Tucson', 'Mesa', 'Chandler', 'Glendale', 'Scottsdale',
-                'Gilbert', 'Tempe', 'Peoria', 'Surprise', 'Yuma', 'Avondale'
-              ].map((city, index) => (
-                <div 
-                  key={city} 
-                  className="p-4 bg-card rounded-lg border border-card-border hover:shadow-card transition-all duration-300 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  {city}
-                </div>
-              ))}
-            </div>
-            
-            <p className="text-muted-foreground mt-8">
-              Don't see your city? <span className="text-primary font-medium">Contact us</span> - we may still be able to help!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 morphing-bg text-primary-foreground relative overflow-hidden">
-        {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full animate-float blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-white/5 rounded-full animate-pulse-slow blur-2xl" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-elastic-entrance">
-            <div className="relative inline-block">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 animate-typewriter">
-                Ready to Start Your Care Journey?
-              </h2>
-              <Sparkles className="absolute -top-4 -right-4 h-8 w-8 text-accent animate-bounce" />
-            </div>
-            <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto animate-fade-in-up stagger-2">
-              Contact us today for a free consultation and learn how our personalized care services can help your family.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-zoom-in stagger-3">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-accent hover:bg-accent-hover text-accent-foreground text-lg px-8 py-4 shadow-hero magnetic-hover pulse-glow group"
+                className="bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-300"
               >
-                <Phone className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                Call (123) 456-7890
+                <Phone className="h-5 w-5 mr-2" />
+                Call (480) 555-1234
               </Button>
+              
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-4 rotate-hover"
+                className="border-gray-300 text-gray-700 hover:bg-white px-8 py-4 text-lg rounded-full transition-all duration-300"
               >
-                Schedule Free Consultation
+                Send us a message
               </Button>
+            </div>
+            
+            <div className="mt-8 text-sm text-gray-600">
+              <p>No pressure, just a friendly conversation to see if we're the right fit</p>
             </div>
           </div>
         </div>

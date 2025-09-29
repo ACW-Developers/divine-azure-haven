@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useScrollAnimation, useParallax } from '@/hooks/useScrollAnimation';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { 
   Phone, 
   Mail, 
@@ -19,13 +18,20 @@ import {
   Users,
   Heart,
   Shield,
-  Sparkles
+  ArrowRight,
+  Star,
+  Coffee,
+  Calendar
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+// Import warm, authentic images
+import contactHero from '@/assets/meal-preparation.jpg';
+import careTeam from '@/assets/services-image.jpg';
+import familyMeeting from '@/assets/family-meeting.jpg';
+
 const Contact = () => {
   const { toast } = useToast();
-  const parallaxOffset = useParallax();
   const heroAnimation = useScrollAnimation(0.1);
   const contactAnimation = useScrollAnimation(0.2);
   const formAnimation = useScrollAnimation(0.2);
@@ -58,8 +64,8 @@ const Contact = () => {
     // Simulate form submission
     setTimeout(() => {
       toast({
-        title: "Message Sent Successfully!",
-        description: "We'll contact you within 24 hours to discuss your care needs.",
+        title: "We've received your message!",
+        description: "Maria from our team will call you today to discuss your needs.",
       });
       setIsSubmitting(false);
       setFormData({
@@ -72,390 +78,416 @@ const Contact = () => {
         message: '',
         preferredContact: ''
       });
-    }, 1000);
+    }, 1500);
   };
 
   const contactInfo = [
     {
       icon: Phone,
-      title: '24/7 Phone Support',
-      primary: '(123) 456-7890',
-      secondary: 'Always available for emergencies',
-      action: 'tel:+1234567890'
+      title: 'Talk with Our Team',
+      primary: '(480) 555-1234',
+      secondary: 'Always here to listen and help',
+      action: 'tel:+14805551234',
+      hours: '24/7 for urgent needs'
     },
     {
       icon: Mail,
-      title: 'Email Us',
-      primary: 'info@divineangelcare.com',
-      secondary: 'Response within 4 hours',
-      action: 'mailto:info@divineangelcare.com'
+      title: 'Send Us an Email',
+      primary: 'hello@divineangelcare.com',
+      secondary: 'We respond within 2 hours',
+      action: 'mailto:hello@divineangelcare.com',
+      hours: 'Mon-Fri 8AM-6PM'
     },
     {
       icon: MapPin,
-      title: 'Service Area',
-      primary: 'Arizona, USA',
-      secondary: 'Statewide coverage available',
-      action: null
+      title: 'Serve All of Arizona',
+      primary: 'Phoenix & Surrounding Areas',
+      secondary: 'In-home consultations available',
+      action: null,
+      hours: 'Statewide coverage'
     },
     {
-      icon: Clock,
-      title: 'Office Hours',
-      primary: 'Mon-Fri: 8AM-6PM',
-      secondary: 'Sat-Sun: 9AM-3PM',
-      action: null
+      icon: Coffee,
+      title: 'Meet for Coffee',
+      primary: 'Free Consultation',
+      secondary: 'At your home or favorite café',
+      action: null,
+      hours: 'Schedule anytime'
     }
   ];
 
-  const whyChooseUs = [
+  const whyFamiliesChooseUs = [
     {
       icon: Heart,
-      title: 'Compassionate Care',
-      description: 'Every team member is selected for their empathy and dedication to client well-being.'
-    },
-    {
-      icon: Shield,
-      title: 'Licensed & Insured',
-      description: 'Full licensing, bonding, and insurance coverage for complete peace of mind.'
+      title: 'Compassionate Matching',
+      description: 'We take time to understand your personality and match you with a caregiver who truly connects with you.'
     },
     {
       icon: Users,
-      title: 'Experienced Team',
-      description: 'Our caregivers undergo thorough background checks and continuous training.'
+      title: 'Consistent Caregivers',
+      description: 'You\'ll work with the same trusted caregivers who become like family over time.'
+    },
+    {
+      icon: Shield,
+      title: 'Fully Vetted Team',
+      description: 'Every caregiver undergoes thorough background checks and receives ongoing training.'
+    },
+    {
+      icon: Star,
+      title: '5-Star Rated',
+      description: '97% of families would recommend us to their friends and loved ones.'
     }
   ];
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative py-20 morphing-bg text-primary-foreground overflow-hidden">
-        <AnimatedBackground />
+      {/* Warm Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 overflow-hidden">
+        {/* Organic background shapes */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-rose-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float-delayed"></div>
+        <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div 
-            ref={heroAnimation.elementRef}
-            className={`transition-all duration-1000 ${
-              heroAnimation.isVisible ? 'animate-elastic-entrance' : 'opacity-0 transform scale-75'
-            }`}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Get In <span className="text-accent relative animate-pulse-glow">
-                Touch
-                <Sparkles className="absolute -top-2 -right-2 h-8 w-8 animate-bounce" />
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
-              Ready to start your care journey? We're here to answer your questions and help create the perfect care plan.
-            </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div 
+              ref={heroAnimation.elementRef}
+              className={`transition-all duration-700 ${
+                heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-6 leading-tight">
+                Let's start
+                <span className="block text-rose-600 mt-2">the conversation</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                We know reaching out for care can feel overwhelming. That's why we begin 
+                every relationship with a warm, no-pressure conversation to understand 
+                your unique situation.
+              </p>
+              
+              <div className="flex items-center gap-4 text-gray-600">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-rose-500" />
+                  <span>No commitment required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-rose-500" />
+                  <span>Free consultation</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={contactHero}
+                  alt="Warm conversation between caregiver and senior"
+                  className="w-full h-[400px] object-cover"
+                />
+                {/* Testimonial overlay */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-sm">
+                  <p className="text-sm text-gray-700 italic mb-2">
+                    "The team at DivineAngel felt like family from our very first call."
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-600">- The Johnson Family</span>
+                    <div className="flex">
+                      <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+                      <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+                      <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+                      <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+                      <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-20 bg-background relative overflow-hidden">
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[linear-gradient(45deg,hsl(var(--primary))_1px,transparent_1px),linear-gradient(-45deg,hsl(var(--secondary))_1px,transparent_1px)] bg-[size:2rem_2rem] animate-pulse-slow" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      {/* Contact Options */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={contactAnimation.elementRef}
-            className={`text-center mb-16 transition-all duration-800 ${
-              contactAnimation.isVisible ? 'animate-bounce-in' : 'opacity-0 transform scale-75'
+            className={`text-center mb-16 transition-all duration-700 ${
+              contactAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              How to <span className="text-primary relative">
-                Reach Us
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-primary rounded-full animate-shimmer" />
-              </span>
+            <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">
+              Choose how you'd like to connect
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Multiple ways to connect with our care team for your convenience.
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Whether you prefer a quick call, email, or meeting in person, we're here to make it comfortable for you.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
-              <Card 
-                key={info.title} 
-                className={`group text-center bg-gradient-card border-card-border shadow-card hover:shadow-card-hover transition-all duration-700 magnetic-hover glow-effect ${
-                  contactAnimation.isVisible ? 'animate-rotate-in' : 'opacity-0 transform rotate-12 scale-75'
+              <div
+                key={info.title}
+                className={`bg-amber-50 rounded-2xl p-6 hover:bg-rose-50 transition-all duration-500 group hover:shadow-md ${
+                  contactAnimation.isVisible ? 'animate-fade-in' : 'opacity-0'
                 }`}
-                style={{ 
-                  animationDelay: contactAnimation.isVisible ? `${index * 0.1}s` : '0s'
-                }}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-8 relative overflow-hidden">
-                  {/* Background Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-                  
-                  <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-all duration-500 pulse-glow relative z-10">
-                    <info.icon className="h-8 w-8 text-primary-foreground group-hover:animate-bounce" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300 relative z-10">{info.title}</h3>
-                  {info.action ? (
-                    <a 
-                      href={info.action}
-                      className="text-primary hover:text-primary-hover font-medium text-lg block mb-2 transition-colors relative z-10"
-                    >
-                      {info.primary}
-                    </a>
-                  ) : (
-                    <p className="text-primary font-medium text-lg mb-2 relative z-10">{info.primary}</p>
-                  )}
-                  <p className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300 relative z-10">{info.secondary}</p>
-                  
-                  {/* Sparkle Effect */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Sparkles className="h-4 w-4 text-accent animate-pulse-glow" />
-                  </div>
-                </CardContent>
-              </Card>
+                <div className="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <info.icon className="h-6 w-6 text-rose-600" />
+                </div>
+                
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  {info.title}
+                </h3>
+                
+                {info.action ? (
+                  <a 
+                    href={info.action}
+                    className="text-rose-600 hover:text-rose-700 font-medium text-lg block mb-2 transition-colors group-hover:translate-x-1 duration-300"
+                  >
+                    {info.primary}
+                  </a>
+                ) : (
+                  <p className="text-rose-600 font-medium text-lg mb-2">{info.primary}</p>
+                )}
+                
+                <p className="text-gray-600 text-sm mb-2">{info.secondary}</p>
+                <p className="text-gray-500 text-xs">{info.hours}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="py-20 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      {/* Contact Form & Information */}
+      <section className="py-20 bg-amber-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
-            {/* Form */}
+            {/* Warm Contact Form */}
             <div 
               ref={formAnimation.elementRef}
-              className={`transition-all duration-1000 ${
-                formAnimation.isVisible ? 'animate-slide-in-left' : 'opacity-0 transform -translate-x-10'
+              className={`transition-all duration-700 ${
+                formAnimation.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
               }`}
             >
-              <Card className="bg-gradient-card border-card-border shadow-card glow-effect">
-                <CardContent className="p-8 relative overflow-hidden">
-                  {/* Background Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50" />
-                  
-                  <div className="flex items-center space-x-3 mb-6 relative z-10">
-                    <MessageCircle className="h-8 w-8 text-primary animate-bounce" />
-                    <h3 className="text-2xl font-bold text-foreground">Send Us a Message</h3>
+              <div className="bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition-all duration-500">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center">
+                    <MessageCircle className="h-6 w-6 text-rose-600" />
                   </div>
-                  
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="firstName" className="text-foreground font-medium">First Name *</Label>
-                        <Input
-                          id="firstName"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                          className="mt-2"
-                          placeholder="Your first name"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="lastName" className="text-foreground font-medium">Last Name *</Label>
-                        <Input
-                          id="lastName"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                          className="mt-2"
-                          placeholder="Your last name"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="email" className="text-foreground font-medium">Email Address *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="mt-2"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="phone" className="text-foreground font-medium">Phone Number *</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                          className="mt-2"
-                          placeholder="(123) 456-7890"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label className="text-foreground font-medium">Service Type</Label>
-                        <Select onValueChange={(value) => handleSelectChange('serviceType', value)}>
-                          <SelectTrigger className="mt-2">
-                            <SelectValue placeholder="Select service type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="personal-care">Personal Care</SelectItem>
-                            <SelectItem value="companionship">Companionship</SelectItem>
-                            <SelectItem value="housekeeping">Light Housekeeping</SelectItem>
-                            <SelectItem value="meal-prep">Meal Preparation</SelectItem>
-                            <SelectItem value="transportation">Transportation</SelectItem>
-                            <SelectItem value="multiple">Multiple Services</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label className="text-foreground font-medium">Care Needed For</Label>
-                        <Select onValueChange={(value) => handleSelectChange('careNeeded', value)}>
-                          <SelectTrigger className="mt-2">
-                            <SelectValue placeholder="Who needs care?" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="parent">Parent</SelectItem>
-                            <SelectItem value="spouse">Spouse/Partner</SelectItem>
-                            <SelectItem value="grandparent">Grandparent</SelectItem>
-                            <SelectItem value="myself">Myself</SelectItem>
-                            <SelectItem value="other">Other Family Member</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
+                  <div>
+                    <h3 className="text-2xl font-serif text-gray-900">Send us a message</h3>
+                    <p className="text-gray-600">We'll get back to you today</p>
+                  </div>
+                </div>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label className="text-foreground font-medium">Preferred Contact Method</Label>
-                      <Select onValueChange={(value) => handleSelectChange('preferredContact', value)}>
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="How should we contact you?" />
+                      <Label htmlFor="firstName" className="text-gray-700 font-medium">First Name *</Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500"
+                        placeholder="Your first name"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName" className="text-gray-700 font-medium">Last Name *</Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500"
+                        placeholder="Your last name"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="email" className="text-gray-700 font-medium">Email Address *</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="phone" className="text-gray-700 font-medium">Phone Number *</Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500"
+                        placeholder="(480) 555-1234"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-gray-700 font-medium">Type of Care Needed</Label>
+                      <Select onValueChange={(value) => handleSelectChange('serviceType', value)}>
+                        <SelectTrigger className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500">
+                          <SelectValue placeholder="Select care type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="phone">Phone Call</SelectItem>
-                          <SelectItem value="email">Email</SelectItem>
-                          <SelectItem value="text">Text Message</SelectItem>
-                          <SelectItem value="any">Any Method</SelectItem>
+                          <SelectItem value="companionship">Companionship & Social Care</SelectItem>
+                          <SelectItem value="personal-care">Personal Care Assistance</SelectItem>
+                          <SelectItem value="housekeeping">Light Housekeeping</SelectItem>
+                          <SelectItem value="meal-prep">Meal Preparation</SelectItem>
+                          <SelectItem value="transportation">Transportation</SelectItem>
+                          <SelectItem value="multiple">Multiple Services</SelectItem>
+                          <SelectItem value="not-sure">Not Sure Yet</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
-
                     <div>
-                      <Label htmlFor="message" className="text-foreground font-medium">Tell Us About Your Needs</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        className="mt-2 min-h-[120px]"
-                        placeholder="Please describe your care needs, schedule preferences, and any specific requirements..."
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full bg-gradient-primary hover:bg-gradient-accent text-primary-foreground text-lg py-4 shadow-card hover:shadow-card-hover transition-all duration-300"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground mr-2"></div>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-5 w-5" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-
-                    <p className="text-muted-foreground text-sm text-center">
-                      * Required fields. We'll respond within 24 hours.
-                    </p>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Why Choose Us */}
-            <div className="animate-slide-in-right">
-              <h3 className="text-3xl font-bold text-foreground mb-8">
-                Why Families Choose <span className="text-primary">DivineAngel Care</span>
-              </h3>
-              
-              <div className="space-y-6 mb-8">
-                {whyChooseUs.map((item, index) => (
-                  <div 
-                    key={item.title}
-                    className="flex items-start space-x-4 animate-fade-in"
-                    style={{ animationDelay: `${index * 0.2}s` }}
-                  >
-                    <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-6 w-6 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold text-foreground mb-2">{item.title}</h4>
-                      <p className="text-muted-foreground">{item.description}</p>
+                      <Label className="text-gray-700 font-medium">Care For</Label>
+                      <Select onValueChange={(value) => handleSelectChange('careNeeded', value)}>
+                        <SelectTrigger className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500">
+                          <SelectValue placeholder="Who needs care?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="parent">My Parent</SelectItem>
+                          <SelectItem value="spouse">My Spouse/Partner</SelectItem>
+                          <SelectItem value="grandparent">Grandparent</SelectItem>
+                          <SelectItem value="myself">Myself</SelectItem>
+                          <SelectItem value="other">Other Family</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
-                ))}
+
+                  <div>
+                    <Label className="text-gray-700 font-medium">Best Way to Reach You</Label>
+                    <Select onValueChange={(value) => handleSelectChange('preferredContact', value)}>
+                      <SelectTrigger className="mt-2 border-gray-300 focus:border-rose-500 focus:ring-rose-500">
+                        <SelectValue placeholder="How should we contact you?" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="phone">Phone Call</SelectItem>
+                        <SelectItem value="email">Email</SelectItem>
+                        <SelectItem value="text">Text Message</SelectItem>
+                        <SelectItem value="any">Whatever is Easiest</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="message" className="text-gray-700 font-medium">
+                      Tell us about your situation
+                    </Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="mt-2 min-h-[120px] border-gray-300 focus:border-rose-500 focus:ring-rose-500"
+                      placeholder="What's on your mind? We're here to listen and help in any way we can..."
+                    />
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-rose-600 hover:bg-rose-700 text-white py-4 text-lg rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending your message...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        Send Message
+                      </span>
+                    )}
+                  </Button>
+
+                  <p className="text-gray-600 text-sm text-center">
+                    We respect your privacy and will never share your information
+                  </p>
+                </form>
+              </div>
+            </div>
+
+            {/* Why Families Trust Us */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-3xl font-serif text-gray-900 mb-6">
+                  Why families trust us with their loved ones
+                </h3>
+                
+                <div className="space-y-6">
+                  {whyFamiliesChooseUs.map((item, index) => (
+                    <div 
+                      key={item.title}
+                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-all duration-300 group"
+                    >
+                      <div className="w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="h-6 w-6 text-rose-600" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
+                        <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="p-6 bg-accent-light rounded-xl">
-                <div className="flex items-center space-x-3 mb-3">
-                  <CheckCircle className="h-6 w-6 text-accent" />
-                  <span className="font-semibold text-accent">Free Consultation</span>
+              {/* Free Consultation Card */}
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-amber-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <Calendar className="h-8 w-8 text-rose-600" />
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900">Free In-Home Consultation</h4>
+                    <p className="text-gray-600 text-sm">No obligation, just honest advice</p>
+                  </div>
                 </div>
-                <p className="text-accent/80 text-sm mb-4">
-                  We offer a complimentary in-home consultation to assess your needs and create a personalized care plan.
+                
+                <p className="text-gray-700 mb-4">
+                  Let us visit your home, meet your family, and provide a personalized care plan at no cost to you.
                 </p>
-                <Button className="bg-accent hover:bg-accent-hover text-accent-foreground">
-                  Schedule Free Consultation
+                
+                <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
+                  Schedule Free Visit
                 </Button>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Emergency Contact */}
-      <section className="py-20 bg-background relative overflow-hidden">
-        {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-accent/10 rounded-full animate-float blur-2xl" />
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-primary/10 rounded-full animate-pulse-slow blur-xl" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-elastic-entrance">
-            <div className="relative inline-block">
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">
-                Need <span className="text-accent animate-pulse-glow">Immediate</span> Assistance?
-              </h2>
-              <Sparkles className="absolute -top-4 -right-4 h-8 w-8 text-accent animate-bounce" />
-            </div>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-up stagger-2">
-              For urgent care needs or emergencies, our support team is available 24/7.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-zoom-in stagger-3">
-              <Button 
-                size="lg" 
-                className="bg-gradient-accent hover:bg-accent-hover text-accent-foreground text-lg px-8 py-4 shadow-hero magnetic-hover pulse-glow group"
-              >
-                <Phone className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                Emergency: (123) 456-7890
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-primary border-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-4 rotate-hover"
-              >
-                Live Chat Support
-              </Button>
+              {/* Team Photo */}
+              <div className="relative rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src={careTeam}
+                  alt="Our care team members"
+                  className="w-full h-48 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+                  <div className="p-4 text-white">
+                    <p className="font-semibold">Meet Our Care Team</p>
+                    <p className="text-sm opacity-90">Real people who genuinely care</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
