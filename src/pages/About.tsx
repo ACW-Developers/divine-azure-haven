@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,16 +16,13 @@ import {
   Handshake,
   Sparkles,
   Star,
-  ArrowRight
+  ArrowRight,
+  Waves,
+  Gem,
+  Leaf,
+  Cloud,
+  Sunrise
 } from 'lucide-react';
-
-import caregivingHero from '@/assets/caregiver.jpg';
-import compassionateCare from '@/assets/caregiver.jpg';
-import professionalTeam from '@/assets/caregiver.jpg';
-import familySupport from '@/assets/caregiver.jpg';
-import elderlyCompanionship from '@/assets/caregiver.jpg';
-import caregivingQuality from '@/assets/caregiver.jpg';
-import teamMeeting from '@/assets/caregiver.jpg';
 
 const About = () => {
   const parallaxOffset = useParallax();
@@ -33,39 +30,77 @@ const About = () => {
   const storyAnimation = useScrollAnimation(0.2);
   const valuesAnimation = useScrollAnimation(0.2);
   const teamAnimation = useScrollAnimation(0.2);
-  
+  const waveCanvasRef = useRef(null);
+  const oceanCanvasRef = useRef(null);
+
+  // High-quality online images from Unsplash
+  const images = {
+    hero: 'https://images.unsplash.com/photo-1576765974257-b414b9ea0051?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    compassionateCare: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    professionalTeam: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    familySupport: 'https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    elderlyCompanionship: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    caregivingQuality: 'https://images.unsplash.com/photo-1584516150909-c43483ee7932?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    teamMeeting: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    director: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    operations: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    coordinator: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+  };
+
+  useEffect(() => {
+    // Animated ocean waves for hero section
+    const canvas = waveCanvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const waveCount = 4;
+
+    let animationId;
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
   const values = [
     {
       icon: Heart,
       title: 'Compassion',
       description: 'We approach every client with empathy, understanding, and genuine care for their well-being.',
-      image: compassionateCare
+      image: images.compassionateCare,
+      color: 'from-rose-100 to-pink-100'
     },
     {
       icon: Shield,
       title: 'Trust',
       description: 'Building lasting relationships through reliability, honesty, and professional excellence.',
-      image: familySupport
+      image: images.familySupport,
+      color: 'from-blue-100 to-cyan-100'
     },
     {
       icon: Award,
       title: 'Excellence',
       description: 'Committed to the highest standards of care and continuous improvement in our services.',
-      image: caregivingQuality
+      image: images.caregivingQuality,
+      color: 'from-amber-100 to-orange-100'
     },
     {
       icon: Handshake,
       title: 'Respect',
       description: 'Honoring the dignity, independence, and unique needs of every individual we serve.',
-      image: elderlyCompanionship
+      image: images.elderlyCompanionship,
+      color: 'from-emerald-100 to-teal-100'
     },
   ];
 
   const stats = [
-    { number: '500+', label: 'Families Served', icon: Users },
-    { number: '50+', label: 'Trained Caregivers', icon: Award },
-    { number: '10+', label: 'Years Experience', icon: Clock },
-    { number: '24/7', label: 'Available Support', icon: Shield },
+    { number: '500+', label: 'Families Served', icon: Users, delay: '100' },
+    { number: '50+', label: 'Trained Caregivers', icon: Award, delay: '200' },
+    { number: '10+', label: 'Years Experience', icon: Clock, delay: '300' },
+    { number: '24/7', label: 'Available Support', icon: Shield, delay: '400' },
   ];
 
   const team = [
@@ -74,53 +109,54 @@ const About = () => {
       role: 'Director of Care',
       experience: '15+ years in healthcare',
       description: 'Licensed RN with extensive experience in home care coordination and family support.',
-      image: professionalTeam
+      image: images.director,
+      specialty: 'Geriatric Care'
     },
     {
       name: 'James Thompson',
       role: 'Operations Manager',
       experience: '12+ years in operations',
       description: 'Ensures seamless service delivery and maintains our high standards of care.',
-      image: teamMeeting
+      image: images.operations,
+      specialty: 'Process Excellence'
     },
     {
       name: 'Sarah Wilson',
       role: 'Care Coordinator',
       experience: '8+ years in care planning',
       description: 'Specializes in creating personalized care plans that meet individual needs.',
-      image: compassionateCare
+      image: images.coordinator,
+      specialty: 'Personalized Planning'
     },
   ];
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative py-24 morphing-bg text-primary-foreground overflow-hidden">
-        <AnimatedBackground />
+      {/* Enhanced Hero Section with Ocean Waves */}
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white overflow-hidden">
+        {/* Ocean Background */}
+        <canvas
+          ref={oceanCanvasRef}
+          className="absolute inset-0 opacity-20"
+        />
         
-        {/* Multiple Parallax Background Images */}
-        <div 
-          className="absolute inset-0 opacity-15 parallax-bg"
-          style={{ transform: `translateY(${parallaxOffset * 0.4}px)` }}
-        >
-          <img
-            src={caregivingHero}
-            alt="Professional caregiving service"
-            className="w-full h-full object-cover"
-          />
+        {/* Animated Waves */}
+        <canvas
+          ref={waveCanvasRef}
+          className="absolute bottom-0 left-0 w-full h-32"
+        />
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-20 animate-float-slow">
+          <Cloud className="h-16 w-16 text-white/20" />
         </div>
-        
-        <div 
-          className="absolute inset-0 opacity-10 parallax-bg"
-          style={{ transform: `translateY(${parallaxOffset * 0.2}px)` }}
-        >
-          <img
-            src={familySupport}
-            alt="Family support and care"
-            className="w-full h-full object-cover"
-          />
+        <div className="absolute bottom-40 right-32 animate-float-delayed">
+          <Sunrise className="h-12 w-12 text-amber-200/30" />
         </div>
-        
+        <div className="absolute top-1/3 right-1/4 animate-float">
+          <Leaf className="h-8 w-8 text-emerald-300/40" />
+        </div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={heroAnimation.elementRef}
@@ -130,20 +166,20 @@ const About = () => {
           >
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 mb-6 animate-fade-in-up">
-                <div className="w-2 h-8 bg-accent rounded-full animate-pulse-glow"></div>
-                <span className="text-accent font-semibold tracking-wider">ABOUT DIVINEANGEL CARE</span>
+                <div className="w-2 h-8 bg-cyan-400 rounded-full animate-pulse-glow"></div>
+                <span className="text-cyan-400 font-semibold tracking-wider">ABOUT DIVINEANGEL CARE</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
                 Compassionate
-                <span className="text-accent relative block mt-2">
+                <span className="text-cyan-300 relative block mt-2">
                   Care That
-                  <Sparkles className="absolute -top-4 -right-8 h-8 w-8 animate-bounce text-accent" />
+                  <Sparkles className="absolute -top-4 -right-8 h-8 w-8 animate-bounce text-cyan-300" />
                 </span>
-                <span className="text-primary-foreground">Truly Matters</span>
+                <span className="text-white">Truly Matters</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-primary-foreground/90 mb-10 leading-relaxed max-w-2xl">
+              <p className="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed max-w-2xl">
                 Founded on the belief that everyone deserves compassionate, dignified care 
                 in the comfort of their own home.
               </p>
@@ -151,7 +187,7 @@ const About = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-accent hover:bg-accent-hover text-accent-foreground text-lg px-8 py-6 shadow-hero magnetic-hover pulse-glow animate-zoom-in"
+                  className="bg-cyan-500 hover:bg-cyan-600 text-white text-lg px-8 py-6 shadow-2xl magnetic-hover pulse-glow animate-zoom-in"
                 >
                   <span>Learn About Our Services</span>
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -159,7 +195,7 @@ const About = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-6 animate-fade-in-up"
+                  className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-8 py-6 animate-fade-in-up backdrop-blur-sm"
                 >
                   Contact Our Team
                 </Button>
@@ -168,29 +204,44 @@ const About = () => {
           </div>
         </div>
 
-        {/* Floating Stats */}
+        {/* Enhanced Floating Stats */}
         <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden xl:block">
           <div className="space-y-6">
             {stats.map((stat, index) => (
               <div 
                 key={stat.label}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/20 animate-float"
+                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20 animate-float group hover:bg-white/20 transition-all duration-500"
                 style={{ animationDelay: `${index * 0.5}s` }}
               >
-                <stat.icon className="h-6 w-6 text-accent mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">{stat.number}</div>
-                <div className="text-white/80 text-sm">{stat.label}</div>
+                <stat.icon className="h-8 w-8 text-cyan-300 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <div className="text-3xl font-bold text-white mb-1">{stat.number}</div>
+                <div className="text-white/80 text-sm font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="h-full w-full bg-[radial-gradient(hsl(var(--primary))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse-slow" />
+      {/* Enhanced Our Story Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="h-full w-full bg-[radial-gradient(circle_at_1px_1px,oklch(0.45_0.24_255.1)_1px,transparent_0)] bg-[size:50px_50px] animate-pulse-slow" />
+        </div>
+
+        {/* Floating Gems */}
+        <div className="absolute top-20 right-20 animate-float">
+          <Gem className="h-12 w-12 text-blue-200/40" />
+        </div>
+        <div className="absolute bottom-32 left-32 animate-float-delayed">
+          <Gem className="h-8 w-8 text-purple-200/30" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -202,18 +253,18 @@ const About = () => {
               }`}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-8 bg-primary rounded-full"></div>
-                <span className="text-primary font-semibold tracking-wider">OUR JOURNEY</span>
+                <div className="w-2 h-8 bg-blue-600 rounded-full"></div>
+                <span className="text-blue-600 font-semibold tracking-wider">OUR JOURNEY</span>
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
                 A Legacy of 
-                <span className="text-primary"> Compassionate Service</span>
+                <span className="text-blue-600"> Compassionate Service</span>
               </h2>
               
-              <div className="space-y-6 text-muted-foreground leading-relaxed text-lg">
+              <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
                 <p>
-                  <strong>DivineAngel Care LLC</strong> was founded in 2014 with a simple yet powerful mission: 
+                  <strong className="text-gray-900">DivineAngel Care LLC</strong> was founded in 2014 with a simple yet powerful mission: 
                   to provide exceptional non-medical home care services that allow individuals to age 
                   gracefully and maintain their independence in the comfort of their own homes.
                 </p>
@@ -233,13 +284,13 @@ const About = () => {
                 {stats.map((stat, index) => (
                   <div 
                     key={stat.label} 
-                    className="text-center group hover:transform hover:scale-105 transition-all duration-300"
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className="text-center group hover:transform hover:scale-105 transition-all duration-500"
+                    style={{ animationDelay: `${stat.delay}ms` }}
                   >
-                    <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 border border-primary/20 group-hover:border-primary/40 transition-all duration-300">
-                      <stat.icon className="h-8 w-8 text-primary mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" />
-                      <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{stat.number}</div>
-                      <div className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
+                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-100 shadow-lg group-hover:shadow-xl group-hover:border-blue-200 transition-all duration-500">
+                      <stat.icon className="h-8 w-8 text-blue-600 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" />
+                      <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{stat.number}</div>
+                      <div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300 font-medium">{stat.label}</div>
                     </div>
                   </div>
                 ))}
@@ -248,17 +299,18 @@ const About = () => {
             
             <div className="relative">
               <div className="relative group">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl blur-lg opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
                 <img
-                  src={professionalTeam}
+                  src={images.professionalTeam}
                   alt="Our professional healthcare team providing compassionate care"
-                  className="rounded-3xl shadow-2xl w-full group-hover:transform group-hover:scale-105 transition-all duration-700"
+                  className="relative rounded-2xl shadow-2xl w-full group-hover:transform group-hover:scale-105 transition-all duration-700 z-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent rounded-3xl group-hover:opacity-0 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent rounded-2xl group-hover:opacity-0 transition-opacity duration-700 z-20"></div>
                 
-                {/* Floating Badge */}
-                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground rounded-2xl p-6 shadow-2xl animate-float">
+                {/* Enhanced Floating Badge */}
+                <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-8 shadow-2xl animate-float z-30 group-hover:scale-110 transition-transform duration-500">
                   <div className="text-center">
-                    <div className="text-2xl font-bold">10+</div>
+                    <div className="text-3xl font-bold">10+</div>
                     <div className="text-sm font-medium">Years of Excellence</div>
                   </div>
                 </div>
@@ -268,32 +320,34 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-24 bg-muted relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[linear-gradient(45deg,hsl(var(--primary))_25%,transparent_25%),linear-gradient(-45deg,hsl(var(--primary))_25%,transparent_25%),linear-gradient(45deg,transparent_75%,hsl(var(--primary))_75%),linear-gradient(-45deg,transparent_75%,hsl(var(--primary))_75%)] bg-[size:20px_20px] animate-shimmer" />
+      {/* Enhanced Mission & Vision */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-slate-100 relative overflow-hidden">
+        {/* Ocean-inspired Background */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="h-full w-full bg-[linear-gradient(45deg,transparent_49%,hsl(220_80%_60%)_49%,hsl(220_80%_60%)_51%,transparent_51%)] bg-[size:20px_20px] animate-shimmer" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Mission */}
-            <Card className="bg-background border-border shadow-2xl hover:shadow-3xl transition-all duration-500 group hover:transform hover:-translate-y-2 animate-fade-in-up">
-              <CardContent className="p-12 relative overflow-hidden">
-                {/* Background Icon */}
-                <Target className="absolute -right-8 -top-8 h-32 w-32 text-primary/5 group-hover:text-primary/10 transition-colors duration-500" />
+            <Card className="bg-white/80 backdrop-blur-sm border-blue-100 shadow-2xl hover:shadow-3xl transition-all duration-500 group hover:transform hover:-translate-y-2 animate-fade-in-up overflow-hidden">
+              <CardContent className="p-12 relative">
+                {/* Ocean Wave Decoration */}
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
                 
-                <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                  <Target className="h-10 w-10 text-primary-foreground" />
+                <Target className="absolute -right-8 -top-8 h-32 w-32 text-blue-100 group-hover:text-blue-200 transition-colors duration-500" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <Target className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-foreground mb-6">Our Mission</h3>
-                <p className="text-muted-foreground leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
                   To enhance the quality of life for individuals and families by providing compassionate, 
                   reliable, and personalized non-medical home care services. We strive to support 
                   independence, dignity, and well-being while giving families peace of mind.
                 </p>
                 
-                <div className="mt-8 flex items-center text-primary font-semibold group-hover:gap-3 transition-all duration-300">
+                <div className="mt-8 flex items-center text-blue-600 font-semibold group-hover:gap-3 transition-all duration-300 cursor-pointer">
                   <span>Learn more</span>
                   <ArrowRight className="h-4 w-4" />
                 </div>
@@ -301,22 +355,24 @@ const About = () => {
             </Card>
 
             {/* Vision */}
-            <Card className="bg-background border-border shadow-2xl hover:shadow-3xl transition-all duration-500 group hover:transform hover:-translate-y-2 animate-fade-in-up">
-              <CardContent className="p-12 relative overflow-hidden">
-                {/* Background Icon */}
-                <Eye className="absolute -right-8 -top-8 h-32 w-32 text-secondary/5 group-hover:text-secondary/10 transition-colors duration-500" />
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-100 shadow-2xl hover:shadow-3xl transition-all duration-500 group hover:transform hover:-translate-y-2 animate-fade-in-up overflow-hidden">
+              <CardContent className="p-12 relative">
+                {/* Ocean Wave Decoration */}
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-400 to-pink-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
                 
-                <div className="w-20 h-20 bg-gradient-secondary rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                  <Eye className="h-10 w-10 text-secondary-foreground" />
+                <Eye className="absolute -right-8 -top-8 h-32 w-32 text-purple-100 group-hover:text-purple-200 transition-colors duration-500" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <Eye className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-foreground mb-6">Our Vision</h3>
-                <p className="text-muted-foreground leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
                   To be Arizona's most trusted and respected provider of home care services, known for 
                   our unwavering commitment to excellence, innovation in care delivery, and the 
                   positive impact we make in our clients' lives every day.
                 </p>
                 
-                <div className="mt-8 flex items-center text-secondary font-semibold group-hover:gap-3 transition-all duration-300">
+                <div className="mt-8 flex items-center text-purple-600 font-semibold group-hover:gap-3 transition-all duration-300 cursor-pointer">
                   <span>Our future goals</span>
                   <ArrowRight className="h-4 w-4" />
                 </div>
@@ -326,28 +382,28 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Values */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        {/* Animated Background Grid */}
+      {/* Enhanced Values Section with Ocean Themes */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 to-cyan-50 relative overflow-hidden">
+        {/* Ocean Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full bg-[linear-gradient(to_right,hsl(var(--primary))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary))_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse-slow" />
+          <div className="h-full w-full bg-[linear-gradient(to_right,hsl(220_80%_60%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220_80%_60%)_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse-slow" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-left mb-20 max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-8 bg-accent rounded-full"></div>
-              <span className="text-accent font-semibold tracking-wider">WHAT GUIDES US</span>
+              <div className="w-2 h-8 bg-cyan-500 rounded-full"></div>
+              <span className="text-cyan-600 font-semibold tracking-wider">WHAT GUIDES US</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
               Our Core 
-              <span className="text-primary relative">
+              <span className="text-blue-600 relative">
                 {' '}Values
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-primary rounded-full animate-shimmer" />
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-shimmer" />
               </span>
             </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed">
               These guiding principles shape everything we do and every interaction we have with our clients and their families.
             </p>
           </div>
@@ -356,30 +412,30 @@ const About = () => {
             {values.map((value, index) => (
               <Card 
                 key={value.title} 
-                className="group bg-background border-border shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden hover:transform hover:-translate-y-2 magnetic-hover"
+                className="group bg-white/80 backdrop-blur-sm border-blue-100 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden hover:transform hover:-translate-y-2 magnetic-hover"
               >
-                <div className="flex flex-col md:flex-row">
+                <div className="flex flex-col md:flex-row h-full">
                   <div className="md:w-2/5 relative overflow-hidden">
                     <img
                       src={value.image}
                       alt={value.title}
                       className="w-full h-48 md:h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className={`absolute inset-0 bg-gradient-to-r from-${value.color.split('-')[1]}-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                   </div>
                   
-                  <CardContent className="p-8 md:w-3/5">
+                  <CardContent className="p-8 md:w-3/5 flex flex-col justify-center">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 pulse-glow">
-                        <value.icon className="h-6 w-6 text-primary-foreground" />
+                      <div className={`w-12 h-12 bg-gradient-to-br ${value.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 pulse-glow shadow-lg`}>
+                        <value.icon className="h-6 w-6 text-gray-700" />
                       </div>
-                      <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{value.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">{value.title}</h3>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">{value.description}</p>
+                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{value.description}</p>
                     
-                    {/* Progress Bar Effect */}
-                    <div className="mt-4 w-full bg-muted rounded-full h-1">
-                      <div className="bg-gradient-primary h-1 rounded-full w-0 group-hover:w-full transition-all duration-1000 delay-300"></div>
+                    {/* Ocean Wave Progress Bar */}
+                    <div className="mt-4 w-full bg-blue-100 rounded-full h-2 overflow-hidden">
+                      <div className="bg-gradient-to-r from-blue-400 to-cyan-400 h-2 rounded-full w-0 group-hover:w-full transition-all duration-1000 delay-300 transform origin-left" />
                     </div>
                   </CardContent>
                 </div>
@@ -389,20 +445,20 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership Team */}
-      <section className="py-24 bg-muted relative overflow-hidden">
+      {/* Enhanced Leadership Team */}
+      <section className="py-24 bg-gradient-to-br from-slate-50 to-purple-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-left mb-20 max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-8 bg-primary rounded-full"></div>
-              <span className="text-primary font-semibold tracking-wider">MEET OUR TEAM</span>
+              <div className="w-2 h-8 bg-purple-600 rounded-full"></div>
+              <span className="text-purple-600 font-semibold tracking-wider">MEET OUR TEAM</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
               Expert 
-              <span className="text-primary"> Leadership</span>
+              <span className="text-purple-600"> Leadership</span>
             </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed">
               Experienced professionals dedicated to providing exceptional care and support for your loved ones.
             </p>
           </div>
@@ -411,7 +467,7 @@ const About = () => {
             {team.map((member, index) => (
               <Card 
                 key={member.name} 
-                className="bg-background border-border shadow-xl hover:shadow-2xl transition-all duration-500 group hover:transform hover:-translate-y-2 overflow-hidden"
+                className="bg-white/80 backdrop-blur-sm border-purple-100 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:transform hover:-translate-y-2 overflow-hidden"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -419,28 +475,24 @@ const About = () => {
                     alt={member.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  {/* Social Links */}
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
-                    <div className="flex gap-2">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300">
-                        <Users className="h-4 w-4 text-primary-foreground" />
-                      </div>
-                    </div>
+                  {/* Specialty Badge */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-700 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    {member.specialty}
                   </div>
                 </div>
                 
                 <CardContent className="p-8 text-left">
-                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{member.name}</h3>
-                  <p className="text-primary font-medium mb-2">{member.role}</p>
-                  <p className="text-sm text-accent font-medium mb-4 flex items-center gap-2">
-                    <Star className="h-4 w-4 fill-accent" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">{member.name}</h3>
+                  <p className="text-purple-600 font-medium mb-2">{member.role}</p>
+                  <p className="text-sm text-cyan-600 font-medium mb-4 flex items-center gap-2">
+                    <Star className="h-4 w-4 fill-cyan-500" />
                     {member.experience}
                   </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors duration-300">{member.description}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{member.description}</p>
                   
-                  <Button variant="ghost" className="mt-6 p-0 h-auto text-primary hover:text-primary/80 hover:bg-transparent group/btn">
+                  <Button variant="ghost" className="mt-6 p-0 h-auto text-purple-600 hover:text-purple-800 hover:bg-transparent group/btn">
                     <span className="flex items-center gap-2">
                       View Profile
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
@@ -453,81 +505,35 @@ const About = () => {
         </div>
       </section>
 
-      {/* Accreditations */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-left mb-20 max-w-3xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-8 bg-accent rounded-full"></div>
-              <span className="text-accent font-semibold tracking-wider">OUR CREDENTIALS</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
-              Licensed & 
-              <span className="text-primary"> Accredited</span>
-            </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              We maintain the highest standards of professionalism and quality in all aspects of our care services.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
-            <div className="flex flex-col items-start p-8 bg-primary/5 rounded-3xl border border-primary/20 hover:border-primary/40 transition-all duration-500 group hover:transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Shield className="h-8 w-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Arizona Licensed</h3>
-              <p className="text-muted-foreground leading-relaxed text-left">
-                Fully licensed by the Arizona Department of Health Services with regular inspections and compliance verification.
-              </p>
-            </div>
-            
-            <div className="flex flex-col items-start p-8 bg-secondary/5 rounded-3xl border border-secondary/20 hover:border-secondary/40 transition-all duration-500 group hover:transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Award className="h-8 w-8 text-secondary-foreground" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Insured & Bonded</h3>
-              <p className="text-muted-foreground leading-relaxed text-left">
-                Comprehensive insurance coverage and bonding for complete protection and peace of mind for our clients.
-              </p>
-            </div>
-            
-            <div className="flex flex-col items-start p-8 bg-accent/5 rounded-3xl border border-accent/20 hover:border-accent/40 transition-all duration-500 group hover:transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <CheckCircle className="h-8 w-8 text-accent-foreground" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Quality Assured</h3>
-              <p className="text-muted-foreground leading-relaxed text-left">
-                Committed to the highest standards of care delivery with continuous training and quality improvement programs.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 morphing-bg text-primary-foreground relative overflow-hidden">
+      {/* Enhanced CTA with Ocean Theme */}
+      <section className="py-24 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white relative overflow-hidden">
+        {/* Ocean Particles */}
+        <canvas
+          ref={oceanCanvasRef}
+          className="absolute inset-0 opacity-10"
+        />
+        
         {/* Multiple Floating Elements */}
-        <div className="absolute top-20 left-20 w-40 h-40 bg-white/10 rounded-full animate-float blur-2xl" />
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-white/5 rounded-full animate-pulse-slow blur-xl" />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-accent/20 rounded-full animate-float-delayed blur-lg" />
+        <div className="absolute top-20 left-20 w-40 h-40 bg-white/10 rounded-full animate-float-slow blur-2xl" />
+        <div className="absolute bottom-20 right-20 w-32 h-32 bg-cyan-500/10 rounded-full animate-pulse-slow blur-xl" />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-white/5 rounded-full animate-float-delayed blur-lg" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-left max-w-4xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-8 bg-accent rounded-full animate-pulse-glow"></div>
-              <span className="text-accent font-semibold tracking-wider">GET STARTED</span>
+              <div className="w-2 h-8 bg-cyan-400 rounded-full animate-pulse-glow"></div>
+              <span className="text-cyan-400 font-semibold tracking-wider">GET STARTED</span>
             </div>
 
             <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
               Experience the
-              <span className="text-accent relative block">
+              <span className="text-cyan-300 relative block">
                 DivineAngel Difference
-                <Sparkles className="absolute -top-4 -right-8 h-8 w-8 text-accent animate-bounce" />
+                <Sparkles className="absolute -top-4 -right-8 h-8 w-8 text-cyan-300 animate-bounce" />
               </span>
             </h2>
             
-            <p className="text-xl text-primary-foreground/90 mb-12 leading-relaxed max-w-3xl">
+            <p className="text-xl text-white/90 mb-12 leading-relaxed max-w-3xl">
               Join hundreds of families who trust us with their most precious loved ones. 
               Schedule your free consultation today and discover how we can make a difference in your life.
             </p>
@@ -535,7 +541,7 @@ const About = () => {
             <div className="flex flex-col sm:flex-row gap-6">
               <Button 
                 size="lg" 
-                className="bg-accent hover:bg-accent-hover text-accent-foreground text-lg px-12 py-6 shadow-2xl magnetic-hover pulse-glow group"
+                className="bg-cyan-500 hover:bg-cyan-600 text-white text-lg px-12 py-6 shadow-2xl magnetic-hover pulse-glow group backdrop-blur-sm"
               >
                 <span className="flex items-center gap-3">
                   Schedule Free Consultation
@@ -546,25 +552,91 @@ const About = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-12 py-6 backdrop-blur-sm"
+                className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-12 py-6 backdrop-blur-sm"
               >
                 Call Us: (480) 555-1234
               </Button>
             </div>
             
-            <div className="mt-8 flex items-center gap-4 text-primary-foreground/80">
+            <div className="mt-8 flex items-center gap-6 text-white/80 flex-wrap">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-accent" />
+                <CheckCircle className="h-5 w-5 text-cyan-400" />
                 <span>No commitment required</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-accent" />
+                <CheckCircle className="h-5 w-5 text-cyan-400" />
                 <span>Free in-home assessment</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-cyan-400" />
+                <span>24/7 support available</span>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-5deg); }
+        }
+        @keyframes ring {
+          0% { transform: rotate(0deg); }
+          25% { transform: rotate(10deg); }
+          75% { transform: rotate(-10deg); }
+          100% { transform: rotate(0deg); }
+        }
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 7s ease-in-out infinite;
+        }
+        .animate-ring {
+          animation: ring 1s ease-in-out;
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+        .magnetic-hover {
+          transition: all 0.3s ease;
+        }
+        .magnetic-hover:hover {
+          transform: scale(1.05);
+        }
+        .pulse-glow {
+          animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-glow {
+          from { box-shadow: 0 0 20px rgba(34, 211, 238, 0.5); }
+          to { box-shadow: 0 0 30px rgba(34, 211, 238, 0.8); }
+        }
+      `}</style>
     </Layout>
   );
 };
