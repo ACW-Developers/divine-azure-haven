@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { AboutSection } from '@/components/sections/AboutSection';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
@@ -9,10 +10,10 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
+      <AboutSection />
       <ServicesSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <CTASection />
     </Layout>
   );
 };

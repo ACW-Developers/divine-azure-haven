@@ -142,14 +142,14 @@ const Contact = () => {
   return (
     <Layout>
       {/* Warm Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 overflow-hidden sm:mt-0">
         {/* Organic background shapes */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-rose-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
         <div className="absolute top-0 right-0 w-72 h-72 bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float-delayed"></div>
         <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-8 gap-12 items-center">
             <div 
               ref={heroAnimation.elementRef}
               className={`transition-all duration-700 ${
@@ -468,10 +468,6 @@ const Contact = () => {
                 <p className="text-gray-700 mb-4">
                   Let us visit your home, meet your family, and provide a personalized care plan at no cost to you.
                 </p>
-                
-                <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
-                  Schedule Free Visit
-                </Button>
               </div>
 
               {/* Team Photo */}

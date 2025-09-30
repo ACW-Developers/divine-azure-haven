@@ -130,7 +130,7 @@ const Services = () => {
           <div className="w-48 h-48 bg-amber-200 rounded-full"></div>
         </div>
         
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 mt-8 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div 

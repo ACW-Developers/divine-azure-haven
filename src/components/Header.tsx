@@ -9,7 +9,6 @@ import {
   User, 
   Settings, 
   Mail, 
-  ChevronDown,
   Facebook,
   Twitter,
   Instagram,
@@ -17,7 +16,6 @@ import {
   Youtube,
   MapPin,
   Clock,
-  Heart,
   Sparkles
 } from 'lucide-react';
 import logo2 from "@/assets/logos/logo2.png"; 
@@ -31,27 +29,18 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-      setIsTopSectionVisible(scrollTop < 100);
+      setIsScrolled(scrollTop > 30); // Reduced threshold for faster detection
+      setIsTopSectionVisible(scrollTop < 50); // Reduced threshold for faster hiding
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navigation = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'About', href: '/about', icon: User },
-    { 
-      name: 'Services', 
-      href: '/services', 
-      icon: Settings,
-      submenu: [
-        { name: 'Web Design', href: '/services/web-design' },
-        { name: 'Development', href: '/services/development' },
-        { name: 'Consulting', href: '/services/consulting' }
-      ]
-    },
+    { name: 'Services', href: '/services', icon: Settings },
     { name: 'Contact', href: '/contact', icon: Mail },
   ];
 
@@ -68,13 +57,13 @@ const Header = () => {
   return (
     <>
       {/* Top Section - Social & Contact Info */}
-      <div className={`fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-primary via-primary-dark to-primary text-white transition-all duration-500 ${
+      <div className={`fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-primary/90 via-primary-dark/90 to-primary/90 backdrop-blur-md text-white transition-all duration-300 ${
         isTopSectionVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center py-3 space-y-2 sm:space-y-0">
             {/* Contact Info */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start space-x-6 text-sm">
+            <div className="flex flex-wrap items-center justify-start lg:justify-center space-x-6 text-sm">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-accent animate-pulse" />
                 <span className="text-white/90">Arizona, USA</span>
@@ -83,14 +72,14 @@ const Header = () => {
                 <Phone className="h-4 w-4 text-accent animate-pulse" />
                 <span className="text-white/90">(123) 456-7890</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="hidden lg:flex items-center space-x-2">
                 <Clock className="h-4 w-4 text-accent animate-pulse" />
                 <span className="text-white/90">24/7 Available</span>
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <span className="text-sm text-white/90 font-medium">Follow Us:</span>
               <div className="flex items-center space-x-3">
                 {socialLinks.map((social) => {
@@ -113,28 +102,21 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl shadow-elegant border-b border-accent/20' 
-          : 'bg-white/90 backdrop-blur-md shadow-card'
+          ? 'bg-white/85 backdrop-blur-xl shadow-elegant border-b border-accent/10' 
+          : 'bg-white/80 backdrop-blur-md shadow-card'
       } ${isTopSectionVisible ? 'mt-12' : 'mt-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
             
             {/* Logo */}
-            <Link 
-              to="/" 
-              className="flex items-center space-x-3 group relative"
-            >
-              {/* Logo */}
-            <Link to="/" className="flex items-center ">
+            <Link to="/" className="flex items-center space-x-3 group relative">
               <img src={logo2} alt="Local Icon" className="w-10 h-10 rounded-xl shadow" />
-
-            </Link>
               
               <div className="flex flex-col">
                 <div className="flex items-baseline space-x-2">
-                  <span className="text-xl font-bold bg-gradient-to-r from-blue-900/90  to-secondary bg-clip-text text-transparent">
+                  <span className="text-xl font-bold bg-gradient-to-r from-primary to-blue-900/80 bg-clip-text text-transparent">
                     DivineAngel
                   </span>
                   <span className="text-xs font-semibold bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent animate-shimmer">
@@ -153,7 +135,6 @@ const Header = () => {
             <nav className="hidden lg:flex items-center space-x-1">
               {navigation.map((item) => {
                 const IconComponent = item.icon;
-                const hasSubmenu = item.submenu;
                 
                 return (
                   <div key={item.name} className="relative group">
@@ -169,29 +150,7 @@ const Header = () => {
                         isActive(item.href) ? 'scale-110' : 'group-hover:scale-110'
                       }`} />
                       <span>{item.name}</span>
-                      {hasSubmenu && (
-                        <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
-                      )}
-
                     </Link>
-
-                    {/* Dropdown Menu */}
-                    {hasSubmenu && (
-                      <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 p-2">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.href}
-                              className="flex items-center px-4 py-3 text-slate-700 hover:text-amber-600 hover:bg-slate-50 rounded-lg transition-all duration-200 group"
-                            >
-                              <div className="w-2 h-2 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full mr-3 group-hover:scale-150 transition-transform duration-300" />
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </div>
                 );
               })}
@@ -223,44 +182,25 @@ const Header = () => {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="lg:hidden animate-fade-in-up">
-              <div className="px-3 pt-3 pb-4 space-y-2 bg-white/95 backdrop-blur-xl rounded-2xl border border-slate-200 mt-2 shadow-xl mb-4">
+              <div className="px-3 pt-3 pb-4 space-y-2 bg-white/20 backdrop-blur-xl rounded-2xl border border-slate-200 mt-2 shadow-xl mb-4">
                 {navigation.map((item) => {
                   const IconComponent = item.icon;
                   return (
-                    <div key={item.name}>
-                      <Link
-                        to={item.href}
-                        className={`flex items-center justify-between px-4 py-3 rounded-lg font-semibold transition-all duration-300 border ${
-                          isActive(item.href)
-                            ? 'text-amber-600 bg-amber-50 shadow-sm border-amber-100'
-                            : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50 border-transparent'
-                        }`}
-                        onClick={() => !item.submenu && setIsMenuOpen(false)}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <IconComponent className="h-4 w-4" />
-                          <span>{item.name}</span>
-                        </div>
-                        {item.submenu && <ChevronDown className="h-4 w-4" />}
-                      </Link>
-                      
-                      {/* Mobile Submenu */}
-                      {item.submenu && (
-                        <div className="ml-8 space-y-1 mt-1">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.href}
-                              className="flex items-center px-4 py-2 text-slate-600 hover:text-amber-600 rounded-lg transition-colors duration-200 border-l-2 border-slate-200 hover:border-amber-400"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full mr-3" />
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`flex items-center px-4 py-3 rounded-lg font-semibold transition-all duration-300 border ${
+                        isActive(item.href)
+                          ? 'text-amber-600 bg-amber-50 shadow-sm border-amber-100'
+                          : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50 border-transparent'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <IconComponent className="h-4 w-4" />
+                        <span>{item.name}</span>
+                      </div>
+                    </Link>
                   );
                 })}
                 

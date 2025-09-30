@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useParallax } from '@/hooks/useScrollAnimation';
@@ -33,7 +32,6 @@ const About = () => {
   const waveCanvasRef = useRef(null);
   const oceanCanvasRef = useRef(null);
 
-  // High-quality online images from Unsplash
   const images = {
     hero: 'https://images.unsplash.com/photo-1576765974257-b414b9ea0051?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     compassionateCare: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
@@ -48,7 +46,6 @@ const About = () => {
   };
 
   useEffect(() => {
-    // Animated ocean waves for hero section
     const canvas = waveCanvasRef.current;
     if (!canvas) return;
 
@@ -96,13 +93,6 @@ const About = () => {
     },
   ];
 
-  const stats = [
-    { number: '500+', label: 'Families Served', icon: Users, delay: '100' },
-    { number: '50+', label: 'Trained Caregivers', icon: Award, delay: '200' },
-    { number: '10+', label: 'Years Experience', icon: Clock, delay: '300' },
-    { number: '24/7', label: 'Available Support', icon: Shield, delay: '400' },
-  ];
-
   const team = [
     {
       name: 'Maria Rodriguez',
@@ -132,102 +122,6 @@ const About = () => {
 
   return (
     <Layout>
-      {/* Enhanced Hero Section with Ocean Waves */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white overflow-hidden">
-        {/* Ocean Background */}
-        <canvas
-          ref={oceanCanvasRef}
-          className="absolute inset-0 opacity-20"
-        />
-        
-        {/* Animated Waves */}
-        <canvas
-          ref={waveCanvasRef}
-          className="absolute bottom-0 left-0 w-full h-32"
-        />
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-20 animate-float-slow">
-          <Cloud className="h-16 w-16 text-white/20" />
-        </div>
-        <div className="absolute bottom-40 right-32 animate-float-delayed">
-          <Sunrise className="h-12 w-12 text-amber-200/30" />
-        </div>
-        <div className="absolute top-1/3 right-1/4 animate-float">
-          <Leaf className="h-8 w-8 text-emerald-300/40" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={heroAnimation.elementRef}
-            className={`transition-all duration-1000 ${
-              heroAnimation.isVisible ? 'animate-slide-in-left' : 'opacity-0 transform -translate-x-10'
-            }`}
-          >
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-6 animate-fade-in-up">
-                <div className="w-2 h-8 bg-cyan-400 rounded-full animate-pulse-glow"></div>
-                <span className="text-cyan-400 font-semibold tracking-wider">ABOUT DIVINEANGEL CARE</span>
-              </div>
-              
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                Compassionate
-                <span className="text-cyan-300 relative block mt-2">
-                  Care That
-                  <Sparkles className="absolute -top-4 -right-8 h-8 w-8 animate-bounce text-cyan-300" />
-                </span>
-                <span className="text-white">Truly Matters</span>
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed max-w-2xl">
-                Founded on the belief that everyone deserves compassionate, dignified care 
-                in the comfort of their own home.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  size="lg" 
-                  className="bg-cyan-500 hover:bg-cyan-600 text-white text-lg px-8 py-6 shadow-2xl magnetic-hover pulse-glow animate-zoom-in"
-                >
-                  <span>Learn About Our Services</span>
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-8 py-6 animate-fade-in-up backdrop-blur-sm"
-                >
-                  Contact Our Team
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Floating Stats */}
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden xl:block">
-          <div className="space-y-6">
-            {stats.map((stat, index) => (
-              <div 
-                key={stat.label}
-                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20 animate-float group hover:bg-white/20 transition-all duration-500"
-                style={{ animationDelay: `${index * 0.5}s` }}
-              >
-                <stat.icon className="h-8 w-8 text-cyan-300 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-                <div className="text-3xl font-bold text-white mb-1">{stat.number}</div>
-                <div className="text-white/80 text-sm font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
-      </section>
 
       {/* Enhanced Our Story Section */}
       <section className="py-24 bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
@@ -279,22 +173,6 @@ const About = () => {
                 </p>
               </div>
 
-              {/* Enhanced Stats Grid */}
-              <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6">
-                {stats.map((stat, index) => (
-                  <div 
-                    key={stat.label} 
-                    className="text-center group hover:transform hover:scale-105 transition-all duration-500"
-                    style={{ animationDelay: `${stat.delay}ms` }}
-                  >
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-100 shadow-lg group-hover:shadow-xl group-hover:border-blue-200 transition-all duration-500">
-                      <stat.icon className="h-8 w-8 text-blue-600 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" />
-                      <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{stat.number}</div>
-                      <div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300 font-medium">{stat.label}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
             
             <div className="relative">
@@ -310,7 +188,7 @@ const About = () => {
                 {/* Enhanced Floating Badge */}
                 <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-8 shadow-2xl animate-float z-30 group-hover:scale-110 transition-transform duration-500">
                   <div className="text-center">
-                    <div className="text-3xl font-bold">10+</div>
+                    <div className="text-3xl font-bold">1+</div>
                     <div className="text-sm font-medium">Years of Excellence</div>
                   </div>
                 </div>
@@ -346,11 +224,6 @@ const About = () => {
                   reliable, and personalized non-medical home care services. We strive to support 
                   independence, dignity, and well-being while giving families peace of mind.
                 </p>
-                
-                <div className="mt-8 flex items-center text-blue-600 font-semibold group-hover:gap-3 transition-all duration-300 cursor-pointer">
-                  <span>Learn more</span>
-                  <ArrowRight className="h-4 w-4" />
-                </div>
               </CardContent>
             </Card>
 
@@ -371,11 +244,6 @@ const About = () => {
                   our unwavering commitment to excellence, innovation in care delivery, and the 
                   positive impact we make in our clients' lives every day.
                 </p>
-                
-                <div className="mt-8 flex items-center text-purple-600 font-semibold group-hover:gap-3 transition-all duration-300 cursor-pointer">
-                  <span>Our future goals</span>
-                  <ArrowRight className="h-4 w-4" />
-                </div>
               </CardContent>
             </Card>
           </div>
@@ -491,13 +359,6 @@ const About = () => {
                     {member.experience}
                   </p>
                   <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{member.description}</p>
-                  
-                  <Button variant="ghost" className="mt-6 p-0 h-auto text-purple-600 hover:text-purple-800 hover:bg-transparent group/btn">
-                    <span className="flex items-center gap-2">
-                      View Profile
-                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                    </span>
-                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -506,7 +367,7 @@ const About = () => {
       </section>
 
       {/* Enhanced CTA with Ocean Theme */}
-      <section className="py-24 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-r from-blue-800 via-blue-500 to-sky-600 text-white relative overflow-hidden">
         {/* Ocean Particles */}
         <canvas
           ref={oceanCanvasRef}
@@ -529,7 +390,7 @@ const About = () => {
               Experience the
               <span className="text-cyan-300 relative block">
                 DivineAngel Difference
-                <Sparkles className="absolute -top-4 -right-8 h-8 w-8 text-cyan-300 animate-bounce" />
+                <Sparkles className="absolute -top-4 -right-8 h-8 w-8 text-cyan-300 animate-spin" />
               </span>
             </h2>
             
@@ -552,7 +413,7 @@ const About = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-12 py-6 backdrop-blur-sm"
+                className="border-white text-black hover:bg-white hover:text-blue-900 text-lg px-12 py-6 backdrop-blur-sm"
               >
                 Call Us: (480) 555-1234
               </Button>
