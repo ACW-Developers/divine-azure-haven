@@ -18,8 +18,8 @@ import {
 } from 'lucide-react';
 
 import heroImage1 from '@/assets/professional-caregiver-assistance.jpg';
-import heroImage2 from '@/assets/meal-preparation.jpg';
-import heroImage3 from '@/assets/companionship-care.jpg';
+import heroImage2 from '@/assets/general/g3.jpg';
+import heroImage3 from '@/assets/general/g2.webp';
 import heroImage4 from '@/assets/hero-image.jpg';
 
 // Hero Slideshow Component

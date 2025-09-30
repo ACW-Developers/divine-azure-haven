@@ -23,9 +23,9 @@ import {
 } from 'lucide-react';
 
 // Import local images for DivineAngel Care
-import aboutHero from '@/assets/meal-preparation.jpg';
+import aboutHero from '@/assets/general/g3.jpg';
 import missionImage from '@/assets/companion-care-activities.jpg';
-import teamImage from '@/assets/companionship-care.jpg';
+import teamImage from '@/assets/general/c3.jpg';
 import valuesImage from '@/assets/Caregiver.jpeg';
 import arizonaService from '@/assets/meal-preparation.jpg';
 
@@ -61,7 +61,7 @@ export const AboutSection = () => {
       initial: 'C',
       description: 'We treat every client with the same empathy, dignity, and respect we would show our own family members.',
       color: 'from-rose-500 to-pink-500',
-      bgColor: 'bg-rose-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Shield,
@@ -69,7 +69,7 @@ export const AboutSection = () => {
       initial: 'T',
       description: 'Your loved one\'s safety is our highest priority. All caregivers are thoroughly screened and insured.',
       color: 'from-blue-500 to-cyan-500',
-      bgColor: 'bg-blue-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Users,
@@ -77,7 +77,7 @@ export const AboutSection = () => {
       initial: 'F',
       description: 'We work closely with families to create personalized care plans that meet unique needs and preferences.',
       color: 'from-emerald-500 to-green-500',
-      bgColor: 'bg-emerald-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Star,
@@ -85,7 +85,7 @@ export const AboutSection = () => {
       initial: 'E',
       description: 'Committed to the highest standards of care through continuous training and quality improvement.',
       color: 'from-amber-500 to-yellow-500',
-      bgColor: 'bg-amber-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Clock,
@@ -93,7 +93,7 @@ export const AboutSection = () => {
       initial: 'R',
       description: '24/7 dependable service you can count on. We show up when you need us most.',
       color: 'from-purple-500 to-violet-500',
-      bgColor: 'bg-purple-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Gem,
@@ -101,7 +101,7 @@ export const AboutSection = () => {
       initial: 'I',
       description: 'Honest, transparent communication and ethical practices in everything we do.',
       color: 'from-indigo-500 to-blue-500',
-      bgColor: 'bg-indigo-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: HandHelping,
@@ -109,7 +109,7 @@ export const AboutSection = () => {
       initial: 'D',
       description: 'Preserving and enhancing the dignity and independence of every individual we serve.',
       color: 'from-teal-500 to-cyan-500',
-      bgColor: 'bg-teal-50'
+      bgColor: 'bg-orange-500'
     },
     {
       icon: Home,
@@ -117,7 +117,7 @@ export const AboutSection = () => {
       initial: 'C',
       description: 'Enabling seniors to remain in the comfort of their own homes with quality support.',
       color: 'from-orange-500 to-amber-500',
-      bgColor: 'bg-orange-50'
+      bgColor: 'bg-orange-500'
     }
   ];
 
@@ -272,7 +272,7 @@ export const AboutSection = () => {
                 Serving Arizona
               </span>
             </div>
-            <div className="absolute top-20 right-8 bg-accent/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+            <div className="absolute top-20 right-8 bg-orange-500/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
               <span className="text-sm font-medium text-white flex items-center gap-2">
                 <BadgeCheck className="w-4 h-4" />
                 State Licensed
@@ -413,14 +413,15 @@ export const AboutSection = () => {
                 key={value.title}
                 className="border-none bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 hover:transform hover:scale-105 group relative overflow-hidden h-full"
             >
-                {/* Initial badge */}
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center shadow-md">
+                {/* Initial badge with orange background */}
+                <div className={`absolute top-4 right-4 w-10 h-10 rounded-full ${value.bgColor} flex items-center justify-center shadow-md`}>
                 <span className="text-white font-bold text-sm">{value.initial}</span>
                 </div>
 
                 <CardContent className="p-8 text-center">
+                {/* Icon container with orange background */}
                 <div
-                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${value.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
+                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl ${value.bgColor} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
                 >
                     <value.icon className="w-8 h-8 text-white" />
                 </div>

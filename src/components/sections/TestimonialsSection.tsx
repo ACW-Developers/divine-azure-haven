@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 
 // Import local images
-import testimonialBg from '@/assets/meal-preparation.jpg';
-import familyPhoto1 from '@/assets/companion-care-activities.jpg';
+import testimonialBg from '@/assets/general/f3.jpg';
+import familyPhoto1 from '@/assets/general/g.jpg';
 import familyPhoto2 from '@/assets/caregiver.jpg';
 import familyPhoto3 from '@/assets/hero-image.jpg';
 

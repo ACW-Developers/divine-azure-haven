@@ -24,12 +24,12 @@ import {
 } from 'lucide-react';
 
 // Import local service images
-import housekeepingImg from '@/assets/meal-preparation.jpg';
-import mealPrepImg from '@/assets/companion-care-activities.jpg';
-import companionshipImg from '@/assets/companionship-care.jpg';
-import transferAssistanceImg from '@/assets/caregiver.jpg';
-import medicationImg from '@/assets/Caregiver.jpeg';
-import hygieneImg from '@/assets/meal-preparation.jpg';
+import housekeepingImg from '@/assets/general/a.jpg';
+import mealPrepImg from '@/assets/services-image.jpg';
+import companionshipImg from '@/assets/caregiver.jpg';
+import transferAssistanceImg from '@/assets/general/d.jpg';
+import medicationImg from '@/assets/general/b.jpeg';
+import hygieneImg from '@/assets/general/c.jpeg';
 import transportationImg from '@/assets/hero-image.jpg';
 import errandsImg from '@/assets/meal-preparation.jpg';
 import dementiaCareImg from '@/assets/professional-caregiver-assistance.jpg';
