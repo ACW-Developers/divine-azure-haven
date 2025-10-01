@@ -29,10 +29,10 @@ import grandmaSmiling from '@/assets/meal-preparation.jpg';
 import cookingTogether from '@/assets/companion-care-activities.jpg';
 import walkingInGarden from '@/assets/walking-garden.jpg';
 import familyMeal from '@/assets/services-image.jpg';
-import readingBook from '@/assets/companion-care-activities.jpg';
-import groceryHelp from '@/assets/professional-caregiver-assistance.jpg';
+import readingBook from '@/assets/general/f1.jpeg';
+import groceryHelp from '@/assets/General/g.jpg';
 import medicationHelp from '@/assets/medication-help.jpg';
-import dressingHelp from '@/assets/hero-image.jpg';
+import dressingHelp from '@/assets/General/c2.jpg';
 import teamPhoto from '@/assets/caregiver.jpg';
 
 const Services = () => {

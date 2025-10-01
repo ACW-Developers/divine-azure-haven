@@ -33,6 +33,7 @@ export const AboutSection = () => {
   const sectionAnimation = useScrollAnimation(0.1);
   const [currentImage, setCurrentImage] = useState(0);
   const canvasRef = useRef(null);
+  const [activeValue, setActiveValue] = useState(0);
 
   const galleryImages = [
     {
@@ -58,66 +59,74 @@ export const AboutSection = () => {
     {
       icon: Heart,
       title: 'Compassionate Care',
-      initial: 'C',
-      description: 'We treat every client with the same empathy, dignity, and respect we would show our own family members.',
+      description: 'We treat every client with the same dignity',
       color: 'from-rose-500 to-pink-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-rose-500/10',
+      borderColor: 'border-rose-200',
+      initial: 'C'
     },
     {
       icon: Shield,
       title: 'Trust & Safety',
-      initial: 'T',
       description: 'Your loved one\'s safety is our highest priority. All caregivers are thoroughly screened and insured.',
       color: 'from-blue-500 to-cyan-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-blue-500/10',
+      borderColor: 'border-blue-200',
+      initial: 'T'
     },
     {
       icon: Users,
       title: 'Family Partnership',
-      initial: 'F',
       description: 'We work closely with families to create personalized care plans that meet unique needs and preferences.',
       color: 'from-emerald-500 to-green-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-emerald-500/10',
+      borderColor: 'border-emerald-200',
+      initial: 'F'
     },
     {
       icon: Star,
       title: 'Excellence',
-      initial: 'E',
       description: 'Committed to the highest standards of care through continuous training and quality improvement.',
       color: 'from-amber-500 to-yellow-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-amber-500/10',
+      borderColor: 'border-amber-200',
+      initial: 'E'
     },
     {
       icon: Clock,
       title: 'Reliability',
-      initial: 'R',
       description: '24/7 dependable service you can count on. We show up when you need us most.',
       color: 'from-purple-500 to-violet-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-purple-500/10',
+      borderColor: 'border-purple-200',
+      initial: 'R'
     },
     {
       icon: Gem,
       title: 'Integrity',
-      initial: 'I',
       description: 'Honest, transparent communication and ethical practices in everything we do.',
       color: 'from-indigo-500 to-blue-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-indigo-500/10',
+      borderColor: 'border-indigo-200',
+      initial: 'I'
     },
     {
       icon: HandHelping,
       title: 'Dignity',
-      initial: 'D',
       description: 'Preserving and enhancing the dignity and independence of every individual we serve.',
       color: 'from-teal-500 to-cyan-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-teal-500/10',
+      borderColor: 'border-teal-200',
+      initial: 'D'
     },
     {
       icon: Home,
       title: 'Comfort',
-      initial: 'C',
       description: 'Enabling seniors to remain in the comfort of their own homes with quality support.',
       color: 'from-orange-500 to-amber-500',
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-orange-500/10',
+      borderColor: 'border-orange-200',
+      initial: 'C'
     }
   ];
 
@@ -128,6 +137,14 @@ export const AboutSection = () => {
     }, 6000);
     return () => clearInterval(interval);
   }, [galleryImages.length]);
+
+  // Auto-rotate active value
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveValue((prev) => (prev + 1) % coreValues.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [coreValues.length]);
 
   // Animated background bubbles
   useEffect(() => {
@@ -272,7 +289,7 @@ export const AboutSection = () => {
                 Serving Arizona
               </span>
             </div>
-            <div className="absolute top-20 right-8 bg-orange-500/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+            <div className="absolute top-20 right-8 bg-accent/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
               <span className="text-sm font-medium text-white flex items-center gap-2">
                 <BadgeCheck className="w-4 h-4" />
                 State Licensed
@@ -384,60 +401,155 @@ export const AboutSection = () => {
             </div>
         </div>
 
-        {/* Core Values Section */}
-        <div className="hidden sm:block mb-20">
-        <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-blue-200/50">
-            <Ribbon className="w-5 h-5 text-blue-600" />
-            <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">
-                OUR FOUNDATION
-            </span>
+        {/* Core Values Section - Redesigned */}
+<div className="mb-24">
+  <div className="text-center mb-16">
+    <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-blue-200/50">
+      <Ribbon className="w-5 h-5 text-blue-600" />
+      <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">
+        OUR FOUNDATION
+      </span>
+    </div>
+
+    <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+      Our{' '}
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+        Core Values
+      </span>
+    </h3>
+
+    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      These fundamental principles guide every aspect of our care and define who we are as Arizona's premier home care provider.
+    </p>
+  </div>
+
+  {/* Radial Values Layout - Hidden on small screens */}
+  <div className="hidden sm:block relative h-[600px] lg:h-[700px] items-center justify-center">
+    {/* Central Active Value Display */}
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <div className="text-center max-w-md mx-auto">
+        <div className={`w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r ${coreValues[activeValue].color} flex items-center justify-center shadow-2xl transform transition-all duration-500 hover:scale-110`}>
+        </div>
+        <h4 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+          {coreValues[activeValue].title}
+        </h4>
+        <p className="text-lg text-gray-600 leading-relaxed">
+          {coreValues[activeValue].description}
+        </p>
+      </div>
+    </div>
+
+    {/* Circular Value Items */}
+    {coreValues.map((value, index) => {
+      const angle = (index * 360) / coreValues.length;
+      const radius = 280;
+      const x = Math.cos((angle * Math.PI) / 180) * radius;
+      const y = Math.sin((angle * Math.PI) / 180) * radius;
+      
+      return (
+        <div
+          key={value.title}
+          className={`absolute w-24 h-24 lg:w-28 lg:h-28 rounded-2xl ${value.bgColor} border-2 ${value.borderColor} backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer group flex items-center justify-center ${
+            index === activeValue 
+              ? 'scale-125 z-20 shadow-2xl border-white ring-4 ring-blue-200' 
+              : 'scale-100 hover:scale-110'
+          }`}
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            transform: `translate(-50%, -50%) ${index === activeValue ? 'scale(1.25)' : 'scale(1)'}`,
+          }}
+          onClick={() => setActiveValue(index)}
+        >
+          <div className="text-center">
+            <div className={`w-12 h-12 mx-auto mb-1 rounded-full bg-gradient-to-r ${value.color} flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow`}>
+              <value.icon className="w-5 h-5 text-white" />
             </div>
-
-            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Our{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                Core Values
+            <span className="text-xs font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">
+              {value.title.split(' ')[0]}
             </span>
-            </h3>
-
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            These fundamental principles guide every aspect of our care and define who we are as Arizona's premier home care provider.
-            </p>
+          </div>
         </div>
+      );
+    })}
 
-        {/* Values Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {coreValues.map((value, index) => (
-            <Card
-                key={value.title}
-                className="border-none bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 hover:transform hover:scale-105 group relative overflow-hidden h-full"
-            >
-                {/* Initial badge with orange background */}
-                <div className={`absolute top-4 right-4 w-10 h-10 rounded-full ${value.bgColor} flex items-center justify-center shadow-md`}>
-                <span className="text-white font-bold text-sm">{value.initial}</span>
-                </div>
+    {/* Connection Lines */}
+    {coreValues.map((_, index) => {
+      const angle = (index * 360) / coreValues.length;
+      const radius = 280;
+      
+      return (
+        <div 
+          key={index}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{
+            width: `${radius}px`,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgb(191 219 254) 20%, rgb(191 219 254) 80%, transparent)',
+            opacity: '0.6',
+            transform: `rotate(${angle}deg)`,
+            transformOrigin: 'left center'
+          }}
+        />
+      );
+    })}
 
-                <CardContent className="p-8 text-center">
-                {/* Icon container with orange background */}
-                <div
-                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl ${value.bgColor} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
-                >
-                    <value.icon className="w-8 h-8 text-white" />
-                </div>
+    {/* Central Orb */}
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-48 h-48 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 opacity-30 blur-xl animate-pulse"></div>
+    </div>
+  </div>
 
-                <h4 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                    {value.title}
-                </h4>
-
-                <p className="text-gray-600 leading-relaxed text-sm">
-                    {value.description}
-                </p>
-                </CardContent>
-            </Card>
-            ))}
+  {/* Mobile Grid - Show only on small screens */}
+  <div className="sm:hidden grid grid-cols-2 gap-4">
+    {coreValues.map((value, index) => (
+      <div
+        key={value.title}
+        className={`p-4 rounded-xl ${value.bgColor} border ${value.borderColor} backdrop-blur-sm text-center cursor-pointer transition-all duration-300 ${
+          index === activeValue ? 'ring-2 ring-blue-400 scale-105' : ''
+        }`}
+        onClick={() => setActiveValue(index)}
+      >
+        <div className={`w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-r ${value.color} flex items-center justify-center shadow-md`}>
+          <value.icon className="w-6 h-6 text-white" />
         </div>
-        </div>
+        <span className="text-sm font-semibold text-gray-700 block mb-2">
+          {value.title}
+        </span>
+        <p className="text-xs text-gray-600 leading-relaxed">
+          {value.description}
+        </p>
+      </div>
+    ))}
+  </div>
+
+  {/* Active Value Display for Mobile */}
+  <div className="sm:hidden mt-8 text-center">
+    <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${coreValues[activeValue].color} flex items-center justify-center shadow-lg`}>
+    </div>
+    <h4 className="text-xl font-bold text-gray-900 mb-2">
+      {coreValues[activeValue].title}
+    </h4>
+    <p className="text-gray-600 leading-relaxed">
+      {coreValues[activeValue].description}
+    </p>
+  </div>
+
+  {/* Navigation Dots */}
+  <div className="flex justify-center space-x-3 mt-12">
+    {coreValues.map((_, index) => (
+      <button
+        key={index}
+        onClick={() => setActiveValue(index)}
+        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+          index === activeValue
+            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 w-8'
+            : 'bg-gray-300 hover:bg-gray-400'
+        }`}
+      />
+    ))}
+  </div>
+</div>
 
         {/* Arizona Commitment Section */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-12 backdrop-blur-sm border border-blue-100/50 relative overflow-hidden">

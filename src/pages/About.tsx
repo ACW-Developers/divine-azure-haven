@@ -23,6 +23,20 @@ import {
   Sunrise
 } from 'lucide-react';
 
+// Hero image
+import heroImg from '@/assets/General/b1.jpeg';
+
+// Local images for about page - create these in your assets folder
+import compassionateCare from '@/assets/General/c3.jpg';
+import professionalTeam from '@/assets/team-image.jpg';
+import familySupport from '@/assets/General/f2.jpg';
+import elderlyCompanionship from '@/assets/General/g3.jpg';
+import caregivingQuality from '@/assets/General/a1.jpeg';
+import teamMeeting from '@/assets/General/e3.jpeg';
+import director from '@/assets/elderly-walking-assistance.jpg';
+import operations from '@/assets/elderly-walking-assistance.jpg';
+import coordinator from '@/assets/elderly-walking-assistance.jpg';
+
 const About = () => {
   const parallaxOffset = useParallax();
   const heroAnimation = useScrollAnimation(0.1);
@@ -33,16 +47,16 @@ const About = () => {
   const oceanCanvasRef = useRef(null);
 
   const images = {
-    hero: 'https://images.unsplash.com/photo-1576765974257-b414b9ea0051?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    compassionateCare: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    professionalTeam: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    familySupport: 'https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    elderlyCompanionship: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    caregivingQuality: 'https://images.unsplash.com/photo-1584516150909-c43483ee7932?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    teamMeeting: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    director: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    operations: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    coordinator: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    hero: heroImg,
+    compassionateCare: compassionateCare,
+    professionalTeam: professionalTeam,
+    familySupport: familySupport,
+    elderlyCompanionship: elderlyCompanionship,
+    caregivingQuality: caregivingQuality,
+    teamMeeting: teamMeeting,
+    director: director,
+    operations: operations,
+    coordinator: coordinator
   };
 
   useEffect(() => {
@@ -97,7 +111,6 @@ const About = () => {
     {
       name: 'Maria Rodriguez',
       role: 'Director of Care',
-      experience: '15+ years in healthcare',
       description: 'Licensed RN with extensive experience in home care coordination and family support.',
       image: images.director,
       specialty: 'Geriatric Care'
@@ -105,7 +118,6 @@ const About = () => {
     {
       name: 'James Thompson',
       role: 'Operations Manager',
-      experience: '12+ years in operations',
       description: 'Ensures seamless service delivery and maintains our high standards of care.',
       image: images.operations,
       specialty: 'Process Excellence'
@@ -113,7 +125,6 @@ const About = () => {
     {
       name: 'Sarah Wilson',
       role: 'Care Coordinator',
-      experience: '8+ years in care planning',
       description: 'Specializes in creating personalized care plans that meet individual needs.',
       image: images.coordinator,
       specialty: 'Personalized Planning'
@@ -158,7 +169,7 @@ const About = () => {
               
               <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
                 <p>
-                  <strong className="text-gray-900">DivineAngel Care LLC</strong> was founded in 2014 with a simple yet powerful mission: 
+                  <strong className="text-gray-900">DivineAngel Care LLC</strong> was founded in 2024 with a simple yet powerful mission: 
                   to provide exceptional non-medical home care services that allow individuals to age 
                   gracefully and maintain their independence in the comfort of their own homes.
                 </p>
@@ -356,7 +367,6 @@ const About = () => {
                   <p className="text-purple-600 font-medium mb-2">{member.role}</p>
                   <p className="text-sm text-cyan-600 font-medium mb-4 flex items-center gap-2">
                     <Star className="h-4 w-4 fill-cyan-500" />
-                    {member.experience}
                   </p>
                   <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{member.description}</p>
                 </CardContent>
