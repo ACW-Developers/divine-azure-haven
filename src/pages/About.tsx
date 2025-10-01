@@ -24,15 +24,15 @@ import {
 } from 'lucide-react';
 
 // Hero image
-import heroImg from '@/assets/General/b1.jpeg';
+import heroImg from '@/assets/general/b1.jpeg';
 
 // Local images for about page - create these in your assets folder
-import compassionateCare from '@/assets/General/c3.jpg';
+import compassionateCare from '@/assets/general/c3.jpg';
 import professionalTeam from '@/assets/team-image.jpg';
-import familySupport from '@/assets/General/f2.jpg';
-import elderlyCompanionship from '@/assets/General/g3.jpg';
-import caregivingQuality from '@/assets/General/a1.jpeg';
-import teamMeeting from '@/assets/General/e3.jpeg';
+import familySupport from '@/assets/general/f2.jpg';
+import elderlyCompanionship from '@/assets/general/g3.jpg';
+import caregivingQuality from '@/assets/general/a1.jpeg';
+import teamMeeting from '@/assets/general/e3.jpeg';
 import director from '@/assets/elderly-walking-assistance.jpg';
 import operations from '@/assets/elderly-walking-assistance.jpg';
 import coordinator from '@/assets/elderly-walking-assistance.jpg';

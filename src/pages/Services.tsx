@@ -30,9 +30,9 @@ import cookingTogether from '@/assets/companion-care-activities.jpg';
 import walkingInGarden from '@/assets/walking-garden.jpg';
 import familyMeal from '@/assets/services-image.jpg';
 import readingBook from '@/assets/general/f1.jpeg';
-import groceryHelp from '@/assets/General/g.jpg';
+import groceryHelp from '@/assets/general/g.jpg';
 import medicationHelp from '@/assets/medication-help.jpg';
-import dressingHelp from '@/assets/General/c2.jpg';
+import dressingHelp from '@/assets/general/c2.jpg';
 import teamPhoto from '@/assets/caregiver.jpg';
 
 const Services = () => {
