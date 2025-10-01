@@ -22,7 +22,6 @@ import heroImage2 from '@/assets/general/g3.jpg';
 import heroImage3 from '@/assets/general/g2.webp';
 import heroImage4 from '@/assets/hero-image.jpg';
 
-// Hero Slideshow Component
 const HeroSlideshow = ({ 
   images, 
   currentSlide, 
