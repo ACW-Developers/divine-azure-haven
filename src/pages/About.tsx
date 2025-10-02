@@ -24,10 +24,10 @@ import {
 } from 'lucide-react';
 
 // Hero image
-import heroImg from '@/assets/general/c3.jpg';
+import heroImg from '@/assets/general/e1.jpeg';
 
 // Local images for about page - create these in your assets folder
-import compassionateCare from '@/assets/general/c3.jpg';
+import compassionateCare from '@/assets/general/c31.jpg';
 import professionalTeam from '@/assets/team-image.jpg';
 import familySupport from '@/assets/general/f2.jpg';
 import elderlyCompanionship from '@/assets/general/g3.jpg';
