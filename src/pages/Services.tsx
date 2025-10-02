@@ -28,7 +28,7 @@ import grandmaSmiling from '@/assets/meal-preparation.jpg';
 import cookingTogether from '@/assets/companion-care-activities.jpg';
 import walkingInGarden from '@/assets/walking-garden.jpg';
 import familyMeal from '@/assets/services-image.jpg';
-import readingBook from '@/assets/general/f1.jpeg';
+import readingBook from '@/assets/general/f21.jpeg';
 import groceryHelp from '@/assets/general/g.jpg';
 import medicationHelp from '@/assets/medication-help.jpg';
 import dressingHelp from '@/assets/general/c2.jpg';
