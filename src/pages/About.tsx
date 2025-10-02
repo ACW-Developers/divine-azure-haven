@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 
 // Hero image
-import heroImg from '@/assets/general/b1.jpeg';
+import heroImg from '@/assets/general/c3.jpg';
 
 // Local images for about page - create these in your assets folder
 import compassionateCare from '@/assets/general/c3.jpg';
