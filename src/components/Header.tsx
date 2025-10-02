@@ -18,12 +18,14 @@ import {
   Clock,
   Sparkles
 } from 'lucide-react';
-import logo2 from "@/assets/logos/logo2.png"; 
+import logo2 from "@/assets/logos/logo2.png";
+import GetStartedDialog from '@/components/GetStartedDialog';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isTopSectionVisible, setIsTopSectionVisible] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -157,7 +159,10 @@ const Header = () => {
               
               {/* CTA Button */}
               <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-accent/20">
-                <Button className="bg-gradient-to-r from-accent via-accent-hover to-accent hover:from-accent-hover hover:to-accent text-white shadow-elegant hover:shadow-glow transform hover:scale-105 transition-all duration-300 font-semibold px-6 py-2 rounded-xl relative overflow-hidden group magnetic-hover glow-effect">
+                <Button 
+                  onClick={() => setIsDialogOpen(true)}
+                  className="bg-gradient-to-r from-accent via-accent-hover to-accent hover:from-accent-hover hover:to-accent text-white shadow-elegant hover:shadow-glow transform hover:scale-105 transition-all duration-300 font-semibold px-6 py-2 rounded-xl relative overflow-hidden group magnetic-hover glow-effect"
+                >
                   <span className="relative z-10 flex items-center">
                     Get Started
                     <Sparkles className="h-4 w-4 ml-2 animate-spin" />
@@ -227,7 +232,10 @@ const Header = () => {
                     </a>
                   </div>
                   
-                  <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg font-semibold py-3 rounded-xl border border-amber-600">
+                  <Button 
+                    onClick={() => setIsDialogOpen(true)}
+                    className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg font-semibold py-3 rounded-xl border border-amber-600"
+                  >
                     Get Started
                     <Sparkles className="h-4 w-4 ml-2" />
                   </Button>
@@ -237,6 +245,9 @@ const Header = () => {
           )}
         </div>
       </header>
+
+      {/* Get Started Dialog */}
+      <GetStartedDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );
 };
