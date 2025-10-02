@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import GetStartedDialog from '@/components/GetStartedDialog';
 import { 
   Heart, 
   Home, 
@@ -37,6 +38,7 @@ import teamPhoto from '@/assets/caregiver.jpg';
 const Services = () => {
   const heroAnimation = useScrollAnimation(0.1);
   const servicesAnimation = useScrollAnimation(0.2);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const services = [
     {
@@ -373,7 +375,8 @@ const Services = () => {
               
               <Button 
                 size="lg" 
-                variant="outline" 
+                variant="outline"
+                onClick={() => setDialogOpen(true)}
                 className="border-gray-300 text-gray-700 hover:bg-white px-8 py-4 text-lg rounded-full transition-all duration-300"
               >
                 Send us a message
@@ -386,6 +389,8 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <GetStartedDialog open={dialogOpen} onOpenChange={setDialogOpen} />
     </Layout>
   );
 };

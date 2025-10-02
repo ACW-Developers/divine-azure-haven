@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useParallax } from '@/hooks/useScrollAnimation';
+import GetStartedDialog from '@/components/GetStartedDialog';
 import { 
   Heart, 
   Shield, 
@@ -45,6 +46,7 @@ const About = () => {
   const teamAnimation = useScrollAnimation(0.2);
   const waveCanvasRef = useRef(null);
   const oceanCanvasRef = useRef(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const images = {
     hero: heroImg,
@@ -411,7 +413,8 @@ const About = () => {
             
             <div className="flex flex-col sm:flex-row gap-6">
               <Button 
-                size="lg" 
+                size="lg"
+                onClick={() => setDialogOpen(true)}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white text-lg px-12 py-6 shadow-2xl magnetic-hover pulse-glow group backdrop-blur-sm"
               >
                 <span className="flex items-center gap-3">
@@ -508,6 +511,8 @@ const About = () => {
           to { box-shadow: 0 0 30px rgba(34, 211, 238, 0.8); }
         }
       `}</style>
+
+      <GetStartedDialog open={dialogOpen} onOpenChange={setDialogOpen} />
     </Layout>
   );
 };

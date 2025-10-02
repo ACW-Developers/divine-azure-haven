@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import GetStartedDialog from '@/components/GetStartedDialog';
 import { 
   Phone, 
   ArrowRight,
@@ -149,6 +150,7 @@ export const HeroSection = () => {
   const [typingSpeed, setTypingSpeed] = useState(150);
   const [isStatsVisible, setIsStatsVisible] = useState(false);
   const statsRef = useRef(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   // Hero slideshow images
   const heroImages = [
@@ -362,15 +364,14 @@ export const HeroSection = () => {
               Call (702) 426-4862
               <div className="absolute -right-2 -top-2 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
             </Button>
-           <Link to="/contact">
-              <Button 
-                variant="ghost" 
-                className="text-white bg-white/20 hover:bg-white/30 text-lg px-8 py-4 magnetic-hover group backdrop-blur-sm border-white/20"
-              >
-                Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              variant="ghost" 
+              onClick={() => setDialogOpen(true)}
+              className="text-white bg-white/20 hover:bg-white/30 text-lg px-8 py-4 magnetic-hover group backdrop-blur-sm border-white/20"
+            >
+              Free Consultation
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </div>
 
           {/* Enhanced Trust Indicators */}
@@ -391,6 +392,10 @@ export const HeroSection = () => {
 
         </div>
       </div>
+
+      <GetStartedDialog open={dialogOpen} onOpenChange={setDialogOpen} />
     </section>
   );
 };
+
+export default HeroSection;
