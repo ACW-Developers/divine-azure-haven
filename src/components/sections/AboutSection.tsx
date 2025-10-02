@@ -25,7 +25,7 @@ import {
 // Import local images for DivineAngel Care
 import aboutHero from '@/assets/general/g3.jpg';
 import missionImage from '@/assets/companion-care-activities.jpg';
-import teamImage from '@/assets/general/c3.jpg';
+import teamImage from '@/assets/general/c31.jpg';
 import valuesImage from '@/assets/Caregiver.jpeg';
 import arizonaService from '@/assets/meal-preparation.jpg';
 
