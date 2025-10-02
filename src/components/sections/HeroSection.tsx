@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from "react-router-dom";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { 
   Phone, 
@@ -361,13 +362,15 @@ export const HeroSection = () => {
               Call (702) 426-4862
               <div className="absolute -right-2 -top-2 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
             </Button>
-            <Button 
-              variant="ghost" 
-              className="text-white bg-white/20 hover:bg-white/30 text-lg px-8 py-4 magnetic-hover group backdrop-blur-sm border-white/20"
-            >
-              Free Consultation
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+           <Link to="/contact">
+              <Button 
+                variant="ghost" 
+                className="text-white bg-white/20 hover:bg-white/30 text-lg px-8 py-4 magnetic-hover group backdrop-blur-sm border-white/20"
+              >
+                Free Consultation
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
 
           {/* Enhanced Trust Indicators */}

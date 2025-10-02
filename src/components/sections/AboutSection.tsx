@@ -322,15 +322,26 @@ export const AboutSection = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                  Our Full Story
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link to="/about">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  >
+                    Our Full Story
+                    <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
 
-                <Button size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 group">
-                  Meet Our Team
-                  <Users className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
-                </Button>
+                <Link to="/about">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 group"
+                  >
+                    Meet Our Team
+                    <Users className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
+                  </Button>
+                </Link>
               </div>
           </div>
         </div>
