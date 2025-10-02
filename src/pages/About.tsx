@@ -425,7 +425,7 @@ const About = () => {
                 variant="outline" 
                 className="border-white text-black hover:bg-white hover:text-blue-900 text-lg px-12 py-6 backdrop-blur-sm"
               >
-                Call Us: (480) 555-1234
+                Call Us: (702)-426-4862
               </Button>
             </div>
             

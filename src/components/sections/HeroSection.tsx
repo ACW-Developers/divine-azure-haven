@@ -347,7 +347,7 @@ export const HeroSection = () => {
           {/* Enhanced Description */}
           <div className="mb-8">
             <p className="text-md sm:text-xl text-white/85 max-w-2xl leading-relaxed backdrop-blur-sm bg-black/20 p-4 rounded-lg border border-white/10">
-              Helping your loved ones maintain independence and dignity with professional 
+              Helping your loved ones maintain independence and dignity with professional medical &
               non-medical home care services in the comfort of their own home.
             </p>
           </div>
@@ -358,7 +358,7 @@ export const HeroSection = () => {
               className="bg-accent hover:bg-accent-hover text-white text-lg px-8 py-4 shadow-elegant hover:shadow-hero transition-all duration-300 magnetic-hover animate-pulse-glow group"
             >
               <Phone className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Call (123) 456-7890
+              Call (702) 426-4862
               <div className="absolute -right-2 -top-2 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
             </Button>
             <Button 

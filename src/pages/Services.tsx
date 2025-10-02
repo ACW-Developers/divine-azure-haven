@@ -369,7 +369,7 @@ const Services = () => {
                 className="bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <Phone className="h-5 w-5 mr-2" />
-                Call (480) 555-1234
+                Call (702)-426-4862
               </Button>
               
               <Button 

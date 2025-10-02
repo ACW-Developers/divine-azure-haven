@@ -85,15 +85,15 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Talk with Our Team',
-      primary: '(480) 555-1234',
+      primary: '(702)-426-4862',
       secondary: 'Always here to listen and help',
-      action: 'tel:+14805551234',
+      action: 'tel:+16028450136',
       hours: '24/7 for urgent needs'
     },
     {
       icon: Mail,
       title: 'Send Us an Email',
-      primary: 'hello@divineangelcare.com',
+      primary: 'info@divineangelcare.com',
       secondary: 'We respond within 2 hours',
       action: 'mailto:hello@divineangelcare.com',
       hours: 'Mon-Fri 8AM-6PM'
