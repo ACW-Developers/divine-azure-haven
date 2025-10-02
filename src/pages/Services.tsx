@@ -24,7 +24,6 @@ import {
   Sprout
 } from 'lucide-react';
 
-// Real, authentic caregiving images
 import grandmaSmiling from '@/assets/meal-preparation.jpg';
 import cookingTogether from '@/assets/companion-care-activities.jpg';
 import walkingInGarden from '@/assets/walking-garden.jpg';
