@@ -94,7 +94,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-slate-900 mt-10 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px); }

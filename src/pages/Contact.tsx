@@ -21,7 +21,9 @@ import {
   ArrowRight,
   Star,
   Coffee,
-  Calendar
+  Calendar,
+  Check,
+  X
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -37,6 +39,7 @@ const Contact = () => {
   const formAnimation = useScrollAnimation(0.2);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -48,6 +51,19 @@ const Contact = () => {
     preferredContact: ''
   });
 
+  const WHATSAPP_NUMBER = '7024264862'; // Removed dashes for WhatsApp URL
+  const WHATSAPP_MESSAGE_TEMPLATE = `New Contact Form Submission:
+  
+Name: {fullName}
+Email: {email}
+Phone: {phone}
+Service Type: {serviceType}
+Care For: {careNeeded}
+Preferred Contact: {preferredContact}
+
+Message:
+{message}`;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -57,17 +73,60 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const constructWhatsAppMessage = () => {
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+    
+    let message = WHATSAPP_MESSAGE_TEMPLATE
+      .replace('{fullName}', fullName || 'Not provided')
+      .replace('{email}', formData.email || 'Not provided')
+      .replace('{phone}', formData.phone || 'Not provided')
+      .replace('{serviceType}', formData.serviceType || 'Not specified')
+      .replace('{careNeeded}', formData.careNeeded || 'Not specified')
+      .replace('{preferredContact}', formData.preferredContact || 'Not specified')
+      .replace('{message}', formData.message || 'No additional message');
+    
+    // Encode for URL
+    return encodeURIComponent(message);
+  };
+
+  const sendToWhatsApp = () => {
+    const message = constructWhatsAppMessage();
+    const whatsappUrl = `https://wa.me/1${WHATSAPP_NUMBER}?text=${message}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Validate required fields
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast({
-        title: "We've received your message!",
-        description: "Maria from our team will call you today to discuss your needs.",
+        title: "Please fill in all required fields",
+        description: "First name, last name, email, and phone are required.",
+        variant: "destructive"
       });
       setIsSubmitting(false);
+      return;
+    }
+
+    // Simulate processing delay
+    setTimeout(() => {
+      // Send to WhatsApp
+      sendToWhatsApp();
+      
+      // Show success message
+      setShowSuccessMessage(true);
+      
+      // Show toast notification
+      toast({
+        title: "Message sent successfully!",
+        description: "Your message has been sent to our WhatsApp. We'll contact you shortly.",
+      });
+      
+      // Reset form
       setFormData({
         firstName: '',
         lastName: '',
@@ -78,7 +137,15 @@ const Contact = () => {
         message: '',
         preferredContact: ''
       });
-    }, 1500);
+      
+      setIsSubmitting(false);
+      
+      // Hide success message after 8 seconds
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 8000);
+      
+    }, 1000);
   };
 
   const contactInfo = [
@@ -87,7 +154,7 @@ const Contact = () => {
       title: 'Talk with Our Team',
       primary: '(702)-426-4862',
       secondary: 'Always here to listen and help',
-      action: 'tel:+16028450136',
+      action: 'tel:+17024264862',
       hours: '24/7 for urgent needs'
     },
     {
@@ -139,8 +206,47 @@ const Contact = () => {
     }
   ];
 
+  // Success Message Component
+  const SuccessMessage = () => (
+    <div className="fixed top-4 right-4 z-50 animate-slide-in">
+      <div className="bg-green-50 border border-green-200 rounded-xl shadow-lg p-6 max-w-sm">
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <Check className="h-5 w-5 text-green-600" />
+          </div>
+          <div className="flex-1">
+            <h4 className="text-lg font-semibold text-green-900 mb-2">Message Sent Successfully!</h4>
+            <p className="text-green-700 text-sm mb-3">
+              Your message has been sent to our WhatsApp number. 
+              We'll contact you at {formData.preferredContact === 'email' ? 'your email' : 'your phone'} 
+              within 24 hours.
+            </p>
+            <div className="flex items-center text-xs text-green-600 gap-4">
+              <span className="flex items-center gap-1">
+                <CheckCircle className="h-3 w-3" />
+                Sent to WhatsApp
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                Quick response guaranteed
+              </span>
+            </div>
+          </div>
+          <button 
+            onClick={() => setShowSuccessMessage(false)}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Layout>
+      {showSuccessMessage && <SuccessMessage />}
+      
       {/* Warm Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 overflow-hidden sm:mt-0">
         {/* Organic background shapes */}
@@ -175,6 +281,10 @@ const Contact = () => {
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-rose-500" />
                   <span>Free consultation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-rose-500" />
+                  <span>Direct WhatsApp response</span>
                 </div>
               </div>
             </div>
@@ -280,7 +390,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-serif text-gray-900">Send us a message</h3>
-                    <p className="text-gray-600">We'll get back to you today</p>
+                    <p className="text-gray-600">We'll respond via WhatsApp today</p>
                   </div>
                 </div>
                 
@@ -405,23 +515,30 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full bg-rose-600 hover:bg-rose-700 text-white py-4 text-lg rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group"
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Sending your message...
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                        Send Message
-                      </span>
-                    )}
-                  </Button>
+                  <div className="space-y-3">
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full bg-rose-600 hover:bg-rose-700 text-white py-4 text-lg rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group"
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          Sending to WhatsApp...
+                        </span>
+                      ) : (
+                        <span className="flex items-center justify-center gap-2">
+                          <MessageCircle className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                          Send via WhatsApp
+                        </span>
+                      )}
+                    </Button>
+                    
+                    <p className="text-gray-600 text-sm text-center">
+                      <span className="font-medium">Note:</span> This will open WhatsApp with your message. 
+                      You'll need to click "Send" in the WhatsApp app to complete.
+                    </p>
+                  </div>
 
                   <p className="text-gray-600 text-sm text-center">
                     We respect your privacy and will never share your information
@@ -452,6 +569,36 @@ const Contact = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* WhatsApp Direct Card */}
+              <div className="bg-green-50 rounded-2xl p-6 shadow-sm border border-green-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <MessageCircle className="h-8 w-8 text-green-600" />
+                  <div>
+                    <h4 className="text-lg font-semibold text-green-900">Direct WhatsApp Support</h4>
+                    <p className="text-green-700 text-sm">Immediate response guaranteed</p>
+                  </div>
+                </div>
+                
+                <p className="text-green-800 mb-4">
+                  Your message goes directly to our care team's WhatsApp for the fastest possible response.
+                </p>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-600" />
+                    <span className="text-sm text-green-700">Typical response time: Under 15 minutes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-600" />
+                    <span className="text-sm text-green-700">24/7 availability for urgent needs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-600" />
+                    <span className="text-sm text-green-700">Direct communication with our care coordinators</span>
+                  </div>
                 </div>
               </div>
 

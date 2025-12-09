@@ -34,9 +34,9 @@ import familySupport from '@/assets/general/f2.jpg';
 import elderlyCompanionship from '@/assets/general/g3.jpg';
 import caregivingQuality from '@/assets/general/a1.jpeg';
 import teamMeeting from '@/assets/general/e3.jpeg';
-import director from '@/assets/elderly-walking-assistance.jpg';
-import operations from '@/assets/elderly-walking-assistance.jpg';
-import coordinator from '@/assets/elderly-walking-assistance.jpg';
+import director from '@/assets/team1.webp';
+import operations from '@/assets/team3.jpg';
+import coordinator from '@/assets/team2.jpg';
 
 const About = () => {
   const parallaxOffset = useParallax();
@@ -111,7 +111,7 @@ const About = () => {
 
   const team = [
     {
-      name: 'Maria Rodriguez',
+      name: 'Malia Rhodes',
       role: 'Director of Care',
       description: 'Licensed RN with extensive experience in home care coordination and family support.',
       image: images.director,
