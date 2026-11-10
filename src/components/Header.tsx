@@ -72,7 +72,7 @@ const Header = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-accent animate-pulse" />
-                <span className="text-white/90">(702)-426-4862</span>
+                <span className="text-white/90">(520) 510-4553</span>
               </div>
               <div className="hidden lg:flex items-center space-x-2">
                 <Clock className="h-4 w-4 text-accent animate-pulse" />
